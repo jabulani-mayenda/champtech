@@ -49,7 +49,7 @@
             position: fixed;
             width: 100%;
             top: 0;
-            z-index: 1000;
+            z-index: 1001; /* Higher z-index to stay above content */
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -116,6 +116,7 @@
             cursor: pointer;
             color: #FFFFFF;
             animation: rotateIn 0.5s ease-out;
+            z-index: 1002; /* Ensure toggle stays above menu */
         }
 
         @keyframes rotateIn {
@@ -123,13 +124,35 @@
             100% { transform: rotate(0deg); opacity: 1; }
         }
 
-        .nav-menu ul {
+        .nav-menu {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 100%;
+            height: 100%;
+            background: var(--section-bg);
+            transition: right 0.3s ease;
+            z-index: 1000; /* Below header but above content */
+            padding: 20px;
             display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+        }
+
+        .nav-menu.active {
+            right: 0;
+        }
+
+        .nav-menu ul {
             list-style: none;
+            margin-top: 60px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
         .nav-menu ul li {
-            margin-left: 20px;
+            margin: 20px 0;
             animation: slideInLinks 1s ease-out;
         }
 
@@ -141,11 +164,30 @@
         .nav-menu ul li a {
             color: #FFFFFF;
             text-decoration: none;
+            font-size: 1.2em;
             transition: color 0.3s;
         }
 
         .nav-menu ul li a:hover {
             color: var(--accent-color);
+        }
+
+        .close-menu {
+            background: none;
+            border: none;
+            font-size: 1.5em;
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            cursor: pointer;
+            color: #FFFFFF;
+            animation: spinOut 0.5s ease-out;
+            z-index: 1001; /* Above menu content */
+        }
+
+        @keyframes spinOut {
+            0% { transform: rotate(180deg); opacity: 0; }
+            100% { transform: rotate(0deg); opacity: 1; }
         }
 
         .hero {
@@ -156,6 +198,7 @@
             position: relative;
             overflow: hidden;
             min-height: 300px;
+            z-index: 0; /* Ensure content is below header */
             animation: scaleUpHero 1s ease-in;
         }
 
@@ -199,6 +242,7 @@
             padding: 40px 20px;
             text-align: center;
             animation: riseUpSection 1s ease-out;
+            z-index: 0; /* Below header */
         }
 
         @keyframes riseUpSection {
@@ -324,6 +368,7 @@
             background: var(--section-bg);
             padding: 10px;
             text-align: center;
+            z-index: 1000; /* Above content but below header */
             animation: liftNav 1s ease-out;
         }
 
@@ -358,11 +403,7 @@
                 background: var(--section-bg);
                 transition: right 0.3s ease;
                 animation: slideInSide 0.5s ease-out forwards;
-            }
-
-            @keyframes slideInSide {
-                0% { right: -100%; }
-                100% { right: 0; }
+                z-index: 1000; /* Ensure it overlays content */
             }
 
             .nav-menu.active {
@@ -385,16 +426,12 @@
                 cursor: pointer;
                 color: #FFFFFF;
                 animation: spinOut 0.5s ease-out;
+                z-index: 1001; /* Above menu content */
             }
 
-            @keyframes spinOut {
-                0% { transform: rotate(180deg); opacity: 0; }
-                100% { transform: rotate(0deg); opacity: 1; }
-            }
-
-            .mobile-nav {
-                display: flex;
-                justify-content: space-around;
+            @keyframes slideInSide {
+                0% { right: -100%; }
+                100% { right: 0; }
             }
         }
     </style>
@@ -416,10 +453,10 @@
         <div class="nav-menu">
             <button class="close-menu">X</button>
             <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="#services">Services</a></li>
-                <li><a href="index.html#portfolio">Portfolio</a></li>
-                <li><a href="index.html#contact">Contact</a></li>
+                <li><a href="index.html" onclick="closeMenuOnClick()">Home</a></li>
+                <li><a href="#services" onclick="closeMenuOnClick()">Services</a></li>
+                <li><a href="index.html#portfolio" onclick="closeMenuOnClick()">Portfolio</a></li>
+                <li><a href="index.html#contact" onclick="closeMenuOnClick()">Contact</a></li>
             </ul>
         </div>
     </header>
@@ -551,10 +588,10 @@
     </section>
 
     <div class="mobile-nav">
-        <a href="index.html"><i class="fas fa-home"></i></a>
-        <a href="#services"><i class="fas fa-cogs"></i></a>
-        <a href="index.html#portfolio"><i class="fas fa-briefcase"></i></a>
-        <a href="index.html#contact"><i class="fas fa-envelope"></i></a>
+        <a href="index.html" onclick="closeMenuOnClick()"><i class="fas fa-home"></i></a>
+        <a href="#services" onclick="closeMenuOnClick()"><i class="fas fa-cogs"></i></a>
+        <a href="index.html#portfolio" onclick="closeMenuOnClick()"><i class="fas fa-briefcase"></i></a>
+        <a href="index.html#contact" onclick="closeMenuOnClick()"><i class="fas fa-envelope"></i></a>
     </div>
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
@@ -576,6 +613,18 @@
 
             closeMenu.addEventListener('click', () => {
                 navMenu.classList.remove('active');
+            });
+
+            // Close menu when a link is clicked
+            function closeMenuOnClick() {
+                if (window.innerWidth <= 768) {
+                    navMenu.classList.remove('active');
+                }
+            }
+
+            // Ensure page loads correctly
+            window.addEventListener('load', () => {
+                navMenu.classList.remove('active'); // Reset menu state on page load
             });
         });
     </script>
