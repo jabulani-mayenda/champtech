@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>ChampTech Creations</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Marketing - ChampTech Creations</title>
     <link href="https://fonts.googleapis.com/css2?family=Georgia&family=Arial&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
@@ -25,7 +25,9 @@
         }
 
         body {
-            background: var(--section-bg);
+            background: linear-gradient(45deg, #121212, rgba(29, 185, 84, 0.1), #000000);
+            background-size: 200% 200%;
+            animation: gradientFlow 15s ease infinite;
             color: var(--text-color);
             line-height: 1.6;
             width: 100%;
@@ -34,13 +36,19 @@
             overflow-x: hidden;
         }
 
+        @keyframes gradientFlow {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
         header {
             background: linear-gradient(to right, #121212, #1E3A8A);
             padding: 20px;
             position: fixed;
             width: 100%;
             top: 0;
-            z-index: 1001; /* Above all content */
+            z-index: 1001;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -64,6 +72,18 @@
             font-size: 1.3em;
             font-weight: bold;
             text-shadow: 0 0 10px var(--glow-color);
+            opacity: 0;
+            transform: translateY(-20px);
+            animation: slideInGlow 25s ease forwards;
+        }
+
+        @keyframes slideInGlow {
+            0% { opacity: 0; transform: translateY(-20px); text-shadow: 0 0 5px var(--glow-color); }
+            20% { opacity: 0.5; transform: translateY(0); text-shadow: 0 0 10px var(--glow-color); }
+            40% { opacity: 0.8; text-shadow: 0 0 15px var(--glow-color); }
+            60% { opacity: 1; text-shadow: 0 0 20px var(--glow-color); }
+            80% { text-shadow: 0 0 15px var(--glow-color); }
+            100% { opacity: 1; transform: translateY(0); text-shadow: 0 0 10px var(--glow-color); }
         }
 
         .social-icons a {
@@ -77,102 +97,44 @@
             color: var(--accent-color);
         }
 
-        .menu-toggle {
-            display: none;
-            font-size: 1.5em;
-            cursor: pointer;
-            color: #FFFFFF;
-            z-index: 1002; /* Above menu */
-        }
-
-        .nav-menu {
-            display: block;
-        }
-
-        .nav-menu ul {
-            display: flex;
-            list-style: none;
-        }
-
-        .nav-menu ul li {
-            margin-left: 15px;
-        }
-
-        .nav-menu ul li a {
-            color: #FFFFFF;
-            text-decoration: none;
-            font-size: 1em;
-            transition: color 0.3s;
-        }
-
-        .nav-menu ul li a:hover {
-            color: var(--accent-color);
-        }
-
-        .nav-menu.active {
-            display: none; /* Hide by default, managed by JS */
-        }
-
-        .nav-menu-mobile {
-            position: fixed;
-            top: 0;
-            right: -100%;
-            width: 80%;
-            height: 100%;
+        .hero, .why-choose-us, .how-we-work, .services, .contact {
             background: var(--section-bg);
-            transition: right 0.2s ease;
-            z-index: 1000;
-            padding: 15px;
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-start;
+            margin-bottom: 20px;
+            padding: 30px 15px;
+            text-align: center;
+            opacity: 0;
         }
 
-        .nav-menu-mobile.active {
-            right: 0;
+        h2 {
+            font-size: 2em;
+            margin-bottom: 15px;
+            color: var(--primary-color);
         }
 
-        .nav-menu-mobile ul {
-            list-style: none;
-            margin-top: 60px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+        /* Animations for Each Section */
+        @keyframes bounceIn {
+            0% { opacity: 0; transform: scale(0.5); }
+            50% { transform: scale(1.05); }
+            100% { opacity: 1; transform: scale(1); }
         }
 
-        .nav-menu-mobile ul li {
-            margin: 10px 0;
+        @keyframes fadeInUp {
+            to { opacity: 1; transform: translateY(0); }
         }
 
-        .nav-menu-mobile ul li a {
-            color: #FFFFFF;
-            text-decoration: none;
-            font-size: 1.2em;
-            transition: color 0.3s;
+        @keyframes slideInLeft {
+            to { opacity: 1; transform: translateX(0); }
         }
 
-        .nav-menu-mobile ul li a:hover {
-            color: var(--accent-color);
-        }
-
-        .close-menu {
-            background: none;
-            border: none;
-            font-size: 1.5em;
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            cursor: pointer;
-            color: #FFFFFF;
+        @keyframes zoomIn {
+            to { opacity: 1; transform: scale(1); }
         }
 
         .hero {
-            padding: 100px 20px 30px;
-            text-align: center;
-            background: var(--section-bg);
-            margin-bottom: 20px;
+            padding-top: 100px;
             min-height: 300px;
-            z-index: 0; /* Below header */
+            animation: bounceIn 1s ease forwards;
+            transform: scale(0.5);
         }
 
         .hero h1 {
@@ -187,18 +149,56 @@
             color: var(--logo-color);
         }
 
-        .services, .contact {
-            background: var(--section-bg);
-            margin-bottom: 20px;
-            padding: 30px 15px;
-            text-align: center;
-            z-index: 0; /* Below header */
+        .why-choose-us {
+            animation: fadeInUp 0.8s ease forwards;
+            transform: translateY(50px);
         }
 
-        h2 {
-            font-size: 2em;
-            margin-bottom: 15px;
+        .why-choose-us .reasons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        .reason-card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 15px;
+            border: 1px solid #2D2D2D;
+            border-radius: 10px;
+            width: 100%;
+            max-width: 250px;
+            text-align: center;
+        }
+
+        .how-we-work {
+            animation: slideInLeft 0.8s ease forwards;
+            transform: translateX(-100px);
+        }
+
+        .how-we-work .steps {
+            text-align: left;
+            max-width: 600px;
+            margin: 20px auto;
+        }
+
+        .step {
+            margin: 15px 0;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .step:before {
+            content: "•";
             color: var(--primary-color);
+            position: absolute;
+            left: 0;
+        }
+
+        .services {
+            animation: zoomIn 0.8s ease forwards;
+            transform: scale(0.9);
         }
 
         .service-cards {
@@ -217,7 +217,7 @@
             max-width: 250px;
             text-decoration: none;
             color: var(--text-color);
-            transition: transform 0.2s;
+            transition: transform 0.3s;
         }
 
         .service-card:hover {
@@ -228,6 +228,11 @@
             width: 40px;
             height: 40px;
             margin-bottom: 10px;
+        }
+
+        .contact {
+            animation: fadeInUp 0.8s ease forwards;
+            transform: translateY(50px);
         }
 
         .contact form {
@@ -265,20 +270,21 @@
         }
 
         .mobile-nav {
-            display: none;
             position: fixed;
             bottom: 0;
             width: 100%;
             background: var(--section-bg);
             padding: 10px;
             text-align: center;
-            z-index: 1000; /* Above content but below header */
+            z-index: 1000;
+            display: flex;
+            justify-content: space-around;
         }
 
         .mobile-nav a {
-            margin: 0 12px;
             color: var(--primary-color);
             font-size: 1.3em;
+            text-decoration: none;
         }
 
         .error-message {
@@ -290,50 +296,11 @@
         }
 
         @media (max-width: 768px) {
-            header {
-                padding: 15px;
-            }
-
-            .logo-img {
-                height: 35px;
-            }
-
-            .company-name {
-                font-size: 1.2em;
-            }
-
-            .social-icons a {
-                margin-left: 5px;
-                font-size: 1em;
-            }
-
-            .menu-toggle {
-                display: block;
-            }
-
-            .nav-menu {
-                display: none; /* Hide desktop menu on mobile */
-            }
-
-            .nav-menu-mobile {
-                display: block; /* Use mobile menu */
-            }
-
-            .nav-menu-mobile.active {
-                right: 0;
-            }
-
-            .close-menu {
-                z-index: 1001; /* Above mobile menu */
-            }
-
-            .mobile-nav {
-                display: flex;
-                justify-content: space-around;
+            .hero, .why-choose-us, .how-we-work, .services, .contact {
+                padding: 80px 15px 20px;
             }
 
             .hero {
-                padding: 80px 15px 20px;
                 min-height: 250px;
             }
 
@@ -345,11 +312,7 @@
                 font-size: 0.9em;
             }
 
-            .services, .contact {
-                padding: 20px 10px;
-            }
-
-            .service-card {
+            .reason-card, .service-card {
                 width: 90%;
                 margin: 10px auto;
             }
@@ -360,7 +323,7 @@
     <header>
         <div class="header-content">
             <div class="logo">
-                <img src="images/logo.jpg" alt="ChampTech Creations Logo" class="logo-img">
+                <img src="images/WhatsApp Image 2025-06-13 at 13.04.15_89c06f46.jpg" alt="ChampTech Creations Logo" class="logo-img">
             </div>
             <h1 class="company-name">ChampTech Creations</h1>
         </div>
@@ -369,55 +332,80 @@
             <a href="#"><i class="fab fa-twitter"></i></a>
             <a href="#"><i class="fab fa-instagram"></i></a>
         </div>
-        <div class="menu-toggle">☰</div>
-        <div class="nav-menu">
-            <ul>
-                <li><a href="#home">Home</a></li>
-                <li><a href="#services">Services</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-        </div>
-        <div class="nav-menu-mobile">
-            <button class="close-menu">X</button>
-            <ul>
-                <li><a href="#home" onclick="closeMobileMenu()">Home</a></li>
-                <li><a href="#services" onclick="closeMobileMenu()">Services</a></li>
-                <li><a href="#contact" onclick="closeMobileMenu()">Contact</a></li>
-            </ul>
-        </div>
     </header>
 
     <section id="home" class="hero">
-        <h1>Welcome to ChampTech Creations</h1>
-        <p>Innovative Tech Solutions for the Future</p>
+        <h1>Digital Marketing Services</h1>
+        <p>Boost Your Brand with Expert Strategies</p>
+    </section>
+
+    <section id="why-choose-us" class="why-choose-us">
+        <h2>Why Choose Us</h2>
+        <p>Discover why ChampTech Creations stands out in digital marketing.</p>
+        <div class="reasons">
+            <div class="reason-card">
+                <h3>Proven Expertise</h3>
+                <p>Years of experience delivering successful campaigns.</p>
+            </div>
+            <div class="reason-card">
+                <h3>Custom Solutions</h3>
+                <p>Tailored strategies to meet your unique business needs.</p>
+            </div>
+            <div class="reason-card">
+                <h3>Results-Driven</h3>
+                <p>Measurable outcomes to maximize your ROI.</p>
+            </div>
+            <div class="reason-card">
+                <h3>24/7 Support</h3>
+                <p>Always here to assist you with your marketing goals.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="how-we-work" class="how-we-work">
+        <h2>How We Work</h2>
+        <p>Our process ensures effective and efficient digital marketing solutions.</p>
+        <div class="steps">
+            <div class="step">1. Consultation: We assess your business goals and target audience.</div>
+            <div class="step">2. Strategy Development: We craft a customized marketing plan.</div>
+            <div class="step">3. Implementation: We execute campaigns across platforms.</div>
+            <div class="step">4. Monitoring & Optimization: We track performance and refine strategies.</div>
+            <div class="step">5. Reporting: We provide detailed insights and results.</div>
+        </div>
     </section>
 
     <section id="services" class="services">
-        <h2>Our Services</h2>
+        <h2>Our Digital Marketing Services</h2>
         <div class="service-cards">
-            <a href="digitalmarketing.html" class="service-card" onclick="navigateToPage(event, 'digitalmarketing.html')">
+            <div class="service-card">
                 <svg class="animated-icon" viewBox="0 0 100 100">
                     <circle cx="50" cy="50" r="40" fill="none" stroke="#28A745" stroke-width="5"/>
                 </svg>
-                <h3>Digital Marketing</h3>
-                <p>Boost your online presence with targeted campaigns.</p>
-            </a>
-            <a href="webdevelopment.html" class="service-card" onclick="navigateToPage(event, 'webdevelopment.html')">
+                <h3>SEO Optimization</h3>
+                <p>Improve your search engine rankings with our expert SEO techniques.</p>
+            </div>
+            <div class="service-card">
                 <svg class="animated-icon" viewBox="0 0 100 100">
                     <circle cx="50" cy="50" r="40" fill="none" stroke="#28A745" stroke-width="5"/>
                 </svg>
-                <h3>Web Development</h3>
-                <p>Create stunning, responsive websites for your business.</p>
-            </a>
-            <a href="camerainstallation.html" class="service-card" onclick="navigateToPage(event, 'camerainstallation.html')">
+                <h3>Social Media Marketing</h3>
+                <p>Engage your audience with targeted social media campaigns.</p>
+            </div>
+            <div class="service-card">
                 <svg class="animated-icon" viewBox="0 0 100 100">
                     <rect x="30" y="30" width="40" height="40" fill="none" stroke="#1DB954" stroke-width="5"/>
                 </svg>
-                <h3>Camera Installation</h3>
-                <p>Secure your space with expert surveillance solutions.</p>
-            </a>
+                <h3>Pay-Per-Click Ads</h3>
+                <p>Drive traffic with high-performing PPC advertising.</p>
+            </div>
+            <div class="service-card">
+                <svg class="animated-icon" viewBox="0 0 100 100">
+                    <polygon points="50,10 90,90 10,90" fill="none" stroke="#28A745" stroke-width="5"/>
+                </svg>
+                <h3>Content Marketing</h3>
+                <p>Create compelling content to attract and retain customers.</p>
+            </div>
         </div>
-        <div class="error-message" id="error-message">Sorry, that page is not available. Please contact us for more info.</div>
     </section>
 
     <section id="contact" class="contact">
@@ -436,63 +424,32 @@
             <button type="submit">Send to WhatsApp</button>
         </form>
         <p>Email: mayendajabulani@gmail.com | WhatsApp: 0881103561 | Address: Blantyre Mpemba</p>
-        <a href="https://wa.me/265881103561?text=Hello%20I%20want%20to%20book%20a%20consultation" class="whatsapp-btn">WhatsApp Us</a>
+        <a href="https://wa.me/265881103561?text=Hello%20I%20want%20to%20book%20a%20digital%20marketing%20consultation" class="whatsapp-btn">WhatsApp Us</a>
     </section>
 
     <div class="mobile-nav">
-        <a href="#home" onclick="closeMobileMenu()"><i class="fas fa-home"></i></a>
-        <a href="#services" onclick="closeMobileMenu()"><i class="fas fa-cogs"></i></a>
-        <a href="#contact" onclick="closeMobileMenu()"><i class="fas fa-envelope"></i></a>
+        <a href="index.html"><i class="fas fa-home"></i></a>
+        <a href="index.html#services"><i class="fas fa-cogs"></i></a>
+        <a href="index.html#portfolio"><i class="fas fa-briefcase"></i></a>
+        <a href="index.html#contact"><i class="fas fa-envelope"></i></a>
     </div>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            const menuToggle = document.querySelector('.menu-toggle');
-            const navMenuMobile = document.querySelector('.nav-menu-mobile');
-            const closeMenu = document.querySelector('.close-menu');
-
-            menuToggle.addEventListener('click', () => {
-                navMenuMobile.classList.toggle('active');
-            });
-
-            closeMenu.addEventListener('click', () => {
-                navMenuMobile.classList.remove('active');
-            });
-
-            // Function to close mobile menu
-            function closeMobileMenu() {
-                if (window.innerWidth <= 768) {
-                    navMenuMobile.classList.remove('active');
-                }
+            const sections = document.querySelectorAll('.hero, .why-choose-us, .how-we-work, .services, .contact');
+            function checkScroll() {
+                sections.forEach(section => {
+                    const sectionPosition = section.getBoundingClientRect().top;
+                    const screenPosition = window.innerHeight / 1.3;
+                    if (sectionPosition < screenPosition) {
+                        section.style.animationPlayState = 'running';
+                    }
+                });
             }
-
-            // Navigation function for service cards
-            function navigateToPage(event, url) {
-                event.preventDefault();
-                try {
-                    fetch(url)
-                        .then(response => {
-                            if (!response.ok) throw new Error('Page not found');
-                            window.location.href = url;
-                        })
-                        .catch(() => {
-                            document.getElementById('error-message').style.display = 'block';
-                            setTimeout(() => {
-                                document.getElementById('error-message').style.display = 'none';
-                            }, 3000);
-                        });
-                } catch {
-                    document.getElementById('error-message').style.display = 'block';
-                    setTimeout(() => {
-                        document.getElementById('error-message').style.display = 'none';
-                    }, 3000);
-                }
-            }
-
-            // Reset menu on page load
-            window.addEventListener('load', () => {
-                navMenuMobile.classList.remove('active');
-            });
+            window.addEventListener('scroll', checkScroll);
+            // Trigger hero animation on load
+            document.querySelector('.hero').style.animationPlayState = 'running';
+            checkScroll(); // Trigger other animations on load if in view
         });
     </script>
 </body>
