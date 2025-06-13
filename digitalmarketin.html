@@ -2,16 +2,14 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Digital Marketing - ChampTech Creations</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>ChampTech Creations</title>
     <link href="https://fonts.googleapis.com/css2?family=Georgia&family=Arial&display=swap" rel="stylesheet">
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
     <style>
         :root {
             --primary-color: #28A745; /* Green */
-            --logo-color: #1E3A8A; /* Dark blue */
+            --logo-color: #00FF00; /* Bright green for company name */
             --glow-color: #1E90FF; /* Glowing blue */
             --accent-color: #1DB954; /* Spotify green */
             --text-color: #FFFFFF;
@@ -23,12 +21,11 @@
             padding: 0;
             box-sizing: border-box;
             font-family: 'Arial', sans-serif;
+            -webkit-tap-highlight-color: transparent;
         }
 
         body {
-            background: linear-gradient(45deg, #121212, rgba(29, 185, 84, 0.1), #000000);
-            background-size: 200% 200%;
-            animation: gradientFlow 15s ease infinite;
+            background: var(--section-bg);
             color: var(--text-color);
             line-height: 1.6;
             width: 100%;
@@ -37,28 +34,16 @@
             overflow-x: hidden;
         }
 
-        @keyframes gradientFlow {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
         header {
             background: linear-gradient(to right, #121212, #1E3A8A);
-            padding: 20px 40px;
+            padding: 20px;
             position: fixed;
             width: 100%;
             top: 0;
-            z-index: 1000;
+            z-index: 1001; /* Above all content */
             display: flex;
             justify-content: space-between;
             align-items: center;
-            animation: fadeInHeader 1s ease-out;
-        }
-
-        @keyframes fadeInHeader {
-            0% { opacity: 0; }
-            100% { opacity: 1; }
         }
 
         .header-content {
@@ -67,43 +52,25 @@
         }
 
         .logo-img {
-            height: 50px;
+            height: 40px;
             width: auto;
-            margin-right: 15px;
+            margin-right: 10px;
             filter: hue-rotate(200deg);
-            animation: bounceLogo 2s infinite;
-        }
-
-        @keyframes bounceLogo {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
         }
 
         .company-name {
             color: var(--logo-color);
             font-family: 'Georgia', serif;
-            font-size: 1.5em;
+            font-size: 1.3em;
             font-weight: bold;
-            text-shadow: 0 0 10px var(--glow-color), 0 0 20px var(--glow-color);
-            animation: pulse 1.5s infinite;
-        }
-
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
+            text-shadow: 0 0 10px var(--glow-color);
         }
 
         .social-icons a {
             color: #FFFFFF;
-            margin-left: 10px;
+            margin-left: 8px;
+            font-size: 1.2em;
             transition: color 0.3s;
-            animation: fadeInSocial 1s ease-in;
-        }
-
-        @keyframes fadeInSocial {
-            0% { opacity: 0; }
-            100% { opacity: 1; }
         }
 
         .social-icons a:hover {
@@ -115,12 +82,11 @@
             font-size: 1.5em;
             cursor: pointer;
             color: #FFFFFF;
-            animation: spinIn 0.5s ease-out;
+            z-index: 1002; /* Above menu */
         }
 
-        @keyframes spinIn {
-            0% { transform: rotate(-180deg); opacity: 0; }
-            100% { transform: rotate(0deg); opacity: 1; }
+        .nav-menu {
+            display: block;
         }
 
         .nav-menu ul {
@@ -129,18 +95,13 @@
         }
 
         .nav-menu ul li {
-            margin-left: 20px;
-            animation: slideInNav 1s ease-out;
-        }
-
-        @keyframes slideInNav {
-            0% { transform: translateX(-50px); opacity: 0; }
-            100% { transform: translateX(0); opacity: 1; }
+            margin-left: 15px;
         }
 
         .nav-menu ul li a {
             color: #FFFFFF;
             text-decoration: none;
+            font-size: 1em;
             transition: color 0.3s;
         }
 
@@ -148,172 +109,158 @@
             color: var(--accent-color);
         }
 
-        .hero {
-            padding: 100px 0 30px;
-            text-align: center;
-            background: transparent;
-            margin-bottom: 20px;
-            position: relative;
-            overflow: hidden;
-            min-height: 300px;
-            animation: zoomInHero 1s ease-in;
+        .nav-menu.active {
+            display: none; /* Hide by default, managed by JS */
         }
 
-        @keyframes zoomInHero {
-            0% { transform: scale(0.8); opacity: 0; }
-            100% { transform: scale(1); opacity: 1; }
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
+        .nav-menu-mobile {
+            position: fixed;
             top: 0;
-            left: 0;
-            width: 100%;
+            right: -100%;
+            width: 80%;
             height: 100%;
-            background: radial-gradient(circle, rgba(30, 144, 255, 0.1) 0%, transparent 70%) repeat;
-            animation: particleWave 6s infinite linear;
+            background: var(--section-bg);
+            transition: right 0.2s ease;
+            z-index: 1000;
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
         }
 
-        @keyframes particleWave {
-            0% { background-position: 0 0; }
-            100% { background-position: 100% 100%; }
+        .nav-menu-mobile.active {
+            right: 0;
+        }
+
+        .nav-menu-mobile ul {
+            list-style: none;
+            margin-top: 60px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .nav-menu-mobile ul li {
+            margin: 10px 0;
+        }
+
+        .nav-menu-mobile ul li a {
+            color: #FFFFFF;
+            text-decoration: none;
+            font-size: 1.2em;
+            transition: color 0.3s;
+        }
+
+        .nav-menu-mobile ul li a:hover {
+            color: var(--accent-color);
+        }
+
+        .close-menu {
+            background: none;
+            border: none;
+            font-size: 1.5em;
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            cursor: pointer;
+            color: #FFFFFF;
+        }
+
+        .hero {
+            padding: 100px 20px 30px;
+            text-align: center;
+            background: var(--section-bg);
+            margin-bottom: 20px;
+            min-height: 300px;
+            z-index: 0; /* Below header */
         }
 
         .hero h1 {
-            font-size: 2.5em;
+            font-size: 2em;
             margin-bottom: 10px;
-            color: var(--glow-color);
+            color: var(--logo-color);
             text-transform: uppercase;
         }
 
         .hero p {
-            font-size: 1.2em;
-            color: var(--glow-color);
+            font-size: 1em;
+            color: var(--logo-color);
         }
 
-        .section {
+        .services, .contact {
             background: var(--section-bg);
             margin-bottom: 20px;
-            padding: 40px 20px;
+            padding: 30px 15px;
             text-align: center;
-            animation: slideUpSection 1s ease-out;
-        }
-
-        @keyframes slideUpSection {
-            0% { transform: translateY(50px); opacity: 0; }
-            100% { transform: translateY(0); opacity: 1; }
+            z-index: 0; /* Below header */
         }
 
         h2 {
-            font-size: 2.5em;
-            margin-bottom: 20px;
+            font-size: 2em;
+            margin-bottom: 15px;
             color: var(--primary-color);
-            text-shadow: 0 0 5px rgba(40, 167, 69, 0.5);
-            animation: fadeInTitle 1s ease-in;
         }
 
-        @keyframes fadeInTitle {
-            0% { opacity: 0; }
-            100% { opacity: 1; }
-        }
-
-        .cards-container {
+        .service-cards {
             display: flex;
             justify-content: center;
-            gap: 20px;
+            gap: 15px;
             flex-wrap: wrap;
-            animation: expandGrid 1.5s ease-out;
         }
 
-        @keyframes expandGrid {
-            0% { transform: scale(0); opacity: 0; }
-            100% { transform: scale(1); opacity: 1; }
-        }
-
-        .card {
+        .service-card {
             background: rgba(255, 255, 255, 0.05);
             padding: 15px;
             border: 1px solid #2D2D2D;
             border-radius: 10px;
-            width: 300px;
-            margin: 10px auto;
-            transition: transform 0.3s;
-            animation: popIn 1s ease-out;
+            width: 100%;
+            max-width: 250px;
+            text-decoration: none;
+            color: var(--text-color);
+            transition: transform 0.2s;
         }
 
-        @keyframes popIn {
-            0% { transform: scale(0); opacity: 0; }
-            50% { transform: scale(1.1); }
-            100% { transform: scale(1); opacity: 1; }
-        }
-
-        .card:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 15px var(--accent-color);
+        .service-card:hover {
+            transform: scale(1.03);
         }
 
         .animated-icon {
-            width: 50px;
-            height: 50px;
+            width: 40px;
+            height: 40px;
             margin-bottom: 10px;
-            animation: rotateGlow 2s infinite;
         }
 
-        @keyframes rotateGlow {
-            0% { transform: rotate(0deg); filter: brightness(1); }
-            50% { transform: rotate(180deg); filter: brightness(1.5); }
-            100% { transform: rotate(360deg); filter: brightness(1); }
-        }
-
-        .booking-form {
-            max-width: 400px;
+        .contact form {
+            display: flex;
+            flex-direction: column;
+            max-width: 350px;
             margin: 0 auto;
             background: rgba(255, 255, 255, 0.05);
-            padding: 20px;
+            padding: 15px;
             border-radius: 10px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-            animation: bounceInForm 1s ease-out;
         }
 
-        @keyframes bounceInForm {
-            0% { transform: scale(0.5); opacity: 0; }
-            50% { transform: scale(1.1); }
-            100% { transform: scale(1); opacity: 1; }
-        }
-
-        .booking-form input, .booking-form button {
-            width: 100%;
-            margin-bottom: 15px;
-            padding: 10px;
+        .contact input, .contact select, .contact textarea {
+            margin-bottom: 10px;
+            padding: 8px;
             border: 1px solid var(--primary-color);
             border-radius: 5px;
-            font-size: 1em;
+            font-size: 0.9em;
             background: rgba(255, 255, 255, 0.1);
             color: var(--text-color);
-            animation: slideInInput 1s ease-in;
         }
 
-        @keyframes slideInInput {
-            0% { transform: translateX(-100px); opacity: 0; }
-            100% { transform: translateX(0); opacity: 1; }
-        }
-
-        .booking-form button {
+        .contact button {
+            padding: 8px;
             background: var(--primary-color);
             color: #FFFFFF;
             border: none;
+            border-radius: 5px;
             cursor: pointer;
-            animation: pulseButton 2s infinite;
+            font-weight: bold;
         }
 
-        @keyframes pulseButton {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
-        }
-
-        .booking-form button:hover {
+        .contact button:hover {
             background: var(--accent-color);
         }
 
@@ -325,77 +272,86 @@
             background: var(--section-bg);
             padding: 10px;
             text-align: center;
-            animation: slideUpNav 1s ease-out;
-        }
-
-        @keyframes slideUpNav {
-            0% { transform: translateY(100%); opacity: 0; }
-            100% { transform: translateY(0); opacity: 1; }
+            z-index: 1000; /* Above content but below header */
         }
 
         .mobile-nav a {
-            margin: 0 15px;
+            margin: 0 12px;
             color: var(--primary-color);
-            font-size: 1.5em;
-            animation: fadeInIcon 1s ease-in;
+            font-size: 1.3em;
         }
 
-        @keyframes fadeInIcon {
-            0% { transform: translateY(-50px); opacity: 0; }
-            100% { transform: translateY(0); opacity: 1; }
+        .error-message {
+            display: none;
+            color: #FF5555;
+            text-align: center;
+            margin-top: 15px;
+            font-size: 1em;
         }
 
         @media (max-width: 768px) {
+            header {
+                padding: 15px;
+            }
+
+            .logo-img {
+                height: 35px;
+            }
+
+            .company-name {
+                font-size: 1.2em;
+            }
+
+            .social-icons a {
+                margin-left: 5px;
+                font-size: 1em;
+            }
+
             .menu-toggle {
                 display: block;
             }
 
             .nav-menu {
-                position: fixed;
-                top: 0;
-                right: -100%;
-                width: 100%;
-                height: 100%;
-                background: var(--section-bg);
-                transition: right 0.3s ease;
-                animation: slideInMenu 0.5s ease-out forwards;
+                display: none; /* Hide desktop menu on mobile */
             }
 
-            @keyframes slideInMenu {
-                0% { right: -100%; }
-                100% { right: 0; }
+            .nav-menu-mobile {
+                display: block; /* Use mobile menu */
             }
 
-            .nav-menu.active {
+            .nav-menu-mobile.active {
                 right: 0;
             }
 
-            .nav-menu ul {
-                flex-direction: column;
-                padding: 20px;
-                margin-top: 60px;
-            }
-
             .close-menu {
-                background: none;
-                border: none;
-                font-size: 1.5em;
-                position: absolute;
-                top: 10px;
-                right: 10px;
-                cursor: pointer;
-                color: #FFFFFF;
-                animation: spinClose 0.5s ease-out;
-            }
-
-            @keyframes spinClose {
-                0% { transform: rotate(-180deg); opacity: 0; }
-                100% { transform: rotate(0deg); opacity: 1; }
+                z-index: 1001; /* Above mobile menu */
             }
 
             .mobile-nav {
                 display: flex;
                 justify-content: space-around;
+            }
+
+            .hero {
+                padding: 80px 15px 20px;
+                min-height: 250px;
+            }
+
+            .hero h1 {
+                font-size: 1.8em;
+            }
+
+            .hero p {
+                font-size: 0.9em;
+            }
+
+            .services, .contact {
+                padding: 20px 10px;
+            }
+
+            .service-card {
+                width: 90%;
+                margin: 10px auto;
             }
         }
     </style>
@@ -404,7 +360,7 @@
     <header>
         <div class="header-content">
             <div class="logo">
-                <img src="images/WhatsApp Image 2025-06-13 at 13.04.15_89c06f46.jpg" alt="ChampTech Creations Logo" class="logo-img">
+                <img src="images/logo.jpg" alt="ChampTech Creations Logo" class="logo-img">
             </div>
             <h1 class="company-name">ChampTech Creations</h1>
         </div>
@@ -415,189 +371,127 @@
         </div>
         <div class="menu-toggle">☰</div>
         <div class="nav-menu">
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+        <div class="nav-menu-mobile">
             <button class="close-menu">X</button>
             <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="#services">Services</a></li>
-                <li><a href="index.html#portfolio">Portfolio</a></li>
-                <li><a href="index.html#contact">Contact</a></li>
+                <li><a href="#home" onclick="closeMobileMenu()">Home</a></li>
+                <li><a href="#services" onclick="closeMobileMenu()">Services</a></li>
+                <li><a href="#contact" onclick="closeMobileMenu()">Contact</a></li>
             </ul>
         </div>
     </header>
 
-    <section class="hero" data-aos="fade-in">
-        <h1>Digital Marketing Services</h1>
-        <p>Boost Your Brand with Cutting-Edge Strategies</p>
+    <section id="home" class="hero">
+        <h1>Welcome to ChampTech Creations</h1>
+        <p>Innovative Tech Solutions for the Future</p>
     </section>
 
-    <section class="section" data-aos="zoom-in">
-        <h2>What We Offer</h2>
-        <div class="cards-container">
-            <div class="card">
+    <section id="services" class="services">
+        <h2>Our Services</h2>
+        <div class="service-cards">
+            <a href="digitalmarketing.html" class="service-card" onclick="navigateToPage(event, 'digitalmarketing.html')">
                 <svg class="animated-icon" viewBox="0 0 100 100">
-                    <circle cx="50" cy="50" r="40" fill="none" stroke="#28A745">
-                        <animate attributeName="r" from="40" to="45" dur="1.5s" repeatCount="indefinite"/>
-                    </svg>
-                <h3>SEO Optimization</h3>
-                <p>Enhance your website's visibility on search engines like Google.</p>
-            </div>
-            <div class="card">
+                    <circle cx="50" cy="50" r="40" fill="none" stroke="#28A745" stroke-width="5"/>
+                </svg>
+                <h3>Digital Marketing</h3>
+                <p>Boost your online presence with targeted campaigns.</p>
+            </a>
+            <a href="webdevelopment.html" class="service-card" onclick="navigateToPage(event, 'webdevelopment.html')">
                 <svg class="animated-icon" viewBox="0 0 100 100">
-                    <rect x="30" y="30" width="40" height="40" fill="none" stroke="#1DB954">
-                        <animateTransform attributeName="transform" type="rotate" from="0 50 50" to="360 50 50" dur="2s" repeatCount="indefinite"/>
-                    </svg>
-                <h3>Social Media Marketing</h3>
-                <p>Build a strong presence on platforms like Facebook and LinkedIn.</p>
-            </div>
-            <div class="card">
+                    <circle cx="50" cy="50" r="40" fill="none" stroke="#28A745" stroke-width="5"/>
+                </svg>
+                <h3>Web Development</h3>
+                <p>Create stunning, responsive websites for your business.</p>
+            </a>
+            <a href="camerainstallation.html" class="service-card" onclick="navigateToPage(event, 'camerainstallation.html')">
                 <svg class="animated-icon" viewBox="0 0 100 100">
-                    <polygon points="50,10 90,90 10,90" fill="none" stroke="#1E90FF">
-                        <animateTransform attributeName="transform" type="rotate" from="0 50 50" to="360 50 50" dur="2.5s" repeatCount="indefinite"/>
-                    </svg>
-                <h3>Content Creation</h3>
-                <p>Develop engaging blogs, videos, and infographics.</p>
-            </div>
-            <div class="card">
-                <svg class="animated-icon" viewBox="0 0 100 100">
-                    <ellipse cx="50" cy="50" rx="30" ry="20" fill="none" stroke="#28A745">
-                        <animate attributeName="rx" from="30" to="35" dur="1.8s" repeatCount="indefinite"/>
-                    </svg>
-                <h3>Email Marketing</h3>
-                <p>Send personalized campaigns to nurture leads.</p>
-            </div>
+                    <rect x="30" y="30" width="40" height="40" fill="none" stroke="#1DB954" stroke-width="5"/>
+                </svg>
+                <h3>Camera Installation</h3>
+                <p>Secure your space with expert surveillance solutions.</p>
+            </a>
         </div>
+        <div class="error-message" id="error-message">Sorry, that page is not available. Please contact us for more info.</div>
     </section>
 
-    <section class="section" data-aos="slide-up">
-        <h2>Benefits of Digital Marketing</h2>
-        <div class="cards-container">
-            <div class="card">
-                <i class="fas fa-chart-line" style="font-size: 2em; color: #28A745; animation: bounce 1s infinite;"></i>
-                <h3>Increased Reach</h3>
-                <p>Connect with a global audience instantly.</p>
-            </div>
-            <div class="card">
-                <i class="fas fa-money-bill-wave" style="font-size: 2em; color: #1DB954; animation: fadeIn 1s ease-in-out infinite alternate;"></i>
-                <h3>Cost-Effective</h3>
-                <p>Achieve high ROI with lower costs than traditional ads.</p>
-            </div>
-            <div class="card">
-                <i class="fas fa-analytics" style="font-size: 2em; color: #1E90FF; animation: rotate 2s linear infinite;"></i>
-                <h3>Measurable Results</h3>
-                <p>Track every click and conversion with analytics.</p>
-            </div>
-            <div class="card">
-                <i class="fas fa-users" style="font-size: 2em; color: #28A745; animation: pulse 1.5s infinite;"></i>
-                <h3>Targeted Audience</h3>
-                <p>Reach the right people at the right time.</p>
-            </div>
-        </div>
-    </section>
-
-    <section class="section" data-aos="slide-right">
-        <h2>Our Strategies</h2>
-        <div class="cards-container">
-            <div class="card">
-                <i class="fas fa-bullseye" style="font-size: 2em; color: #28A745; animation: zoomIn 1s ease-in-out infinite;"></i>
-                <h3>Targeted Campaigns</h3>
-                <p>Focus on specific demographics for maximum impact.</p>
-            </div>
-            <div class="card">
-                <i class="fas fa-cloud-upload-alt" style="font-size: 2em; color: #1DB954; animation: slideIn 1s ease-out infinite alternate;"></i>
-                <h3>Content Distribution</h3>
-                <p>Share content across blogs, social, and email.</p>
-            </div>
-            <div class="card">
-                <i class="fas fa-cogs" style="font-size: 2em; color: #1E90FF; animation: rotateGlow 2s infinite;"></i>
-                <h3>Optimization</h3>
-                <p>Adjust strategies based on performance data.</p>
-            </div>
-            <div class="card">
-                <i class="fas fa-chart-pie" style="font-size: 2em; color: #28A745; animation: bounce 1.2s infinite;"></i>
-                <h3>Data-Driven Decisions</h3>
-                <p>Use insights to refine your marketing plan.</p>
-            </div>
-        </div>
-    </section>
-
-    <section class="section" data-aos="slide-left">
-        <h2>Latest Trends in 2025</h2>
-        <div class="cards-container">
-            <div class="card">
-                <i class="fas fa-robot" style="font-size: 2em; color: #1E90FF; animation: fadeIn 1s ease-in-out infinite alternate;"></i>
-                <h3>AI-Powered Marketing</h3>
-                <p>Leverage AI for personalized ads and chatbots.</p>
-            </div>
-            <div class="card">
-                <i class="fas fa-video" style="font-size: 2em; color: #1DB954; animation: rotate 2s linear infinite;"></i>
-                <h3>Video Content Rise</h3>
-                <p>Short-form videos dominate social platforms.</p>
-            </div>
-            <div class="card">
-                <i class="fas fa-lock" style="font-size: 2em; color: #28A745; animation: pulse 1.5s infinite;"></i>
-                <h3>Privacy Focus</h3>
-                <p>Adapt to new data privacy regulations.</p>
-            </div>
-        </div>
-    </section>
-
-    <section class="section" data-aos="zoom-in">
-        <h2>Tools We Use</h2>
-        <div class="cards-container">
-            <div class="card">
-                <i class="fas fa-chart-bar" style="font-size: 2em; color: #1E90FF; animation: slideIn 1s ease-out infinite alternate;"></i>
-                <h3>Google Analytics</h3>
-                <p>Track and analyze website traffic.</p>
-            </div>
-            <div class="card">
-                <i class="fas fa-pen" style="font-size: 2em; color: #1DB954; animation: zoomIn 1s ease-in-out infinite;"></i>
-                <h3>Canva</h3>
-                <p>Create stunning graphics and designs.</p>
-            </div>
-            <div class="card">
-                <i class="fas fa-envelope" style="font-size: 2em; color: #28A745; animation: bounce 1s infinite;"></i>
-                <h3>Mailchimp</h3>
-                <p>Manage email marketing campaigns.</p>
-            </div>
-        </div>
-    </section>
-
-    <section class="section booking-section" data-aos="fade-in">
-        <h2>Book a Digital Marketing Consultation</h2>
-        <div class="booking-form">
-            <input type="text" placeholder="Your Name" required>
-            <input type="email" placeholder="Your Email" required>
-            <input type="tel" placeholder="Your Phone" required>
-            <button onclick="window.location.href='https://wa.me/265881103561?text=Hello%20I%20want%20to%20book%20a%20digital%20marketing%20consultation'">Book Now</button>
-        </div>
+    <section id="contact" class="contact">
+        <h2>Contact Us</h2>
+        <form action="https://zapier.com/webhook/your-webhook-url" method="POST">
+            <input type="text" name="name" placeholder="Your Name" required>
+            <input type="email" name="email" placeholder="Your Email" required>
+            <input type="tel" name="phone" placeholder="Your Phone" required>
+            <select name="service" required>
+                <option value="">Select Service</option>
+                <option value="digitalmarketing">Digital Marketing</option>
+                <option value="webdevelopment">Web Development</option>
+                <option value="camerainstallation">Camera Installation</option>
+            </select>
+            <textarea name="message" placeholder="Your Message" required></textarea>
+            <button type="submit">Send to WhatsApp</button>
+        </form>
+        <p>Email: mayendajabulani@gmail.com | WhatsApp: 0881103561 | Address: Blantyre Mpemba</p>
+        <a href="https://wa.me/265881103561?text=Hello%20I%20want%20to%20book%20a%20consultation" class="whatsapp-btn">WhatsApp Us</a>
     </section>
 
     <div class="mobile-nav">
-        <a href="index.html"><i class="fas fa-home"></i></a>
-        <a href="#services"><i class="fas fa-cogs"></i></a>
-        <a href="index.html#portfolio"><i class="fas fa-briefcase"></i></a>
-        <a href="index.html#contact"><i class="fas fa-envelope"></i></a>
+        <a href="#home" onclick="closeMobileMenu()"><i class="fas fa-home"></i></a>
+        <a href="#services" onclick="closeMobileMenu()"><i class="fas fa-cogs"></i></a>
+        <a href="#contact" onclick="closeMobileMenu()"><i class="fas fa-envelope"></i></a>
     </div>
 
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            AOS.init({
-                duration: 1000,
-                easing: 'ease-in-out',
-            });
-
             const menuToggle = document.querySelector('.menu-toggle');
-            const navMenu = document.querySelector('.nav-menu');
+            const navMenuMobile = document.querySelector('.nav-menu-mobile');
             const closeMenu = document.querySelector('.close-menu');
 
             menuToggle.addEventListener('click', () => {
-                navMenu.classList.add('active');
+                navMenuMobile.classList.toggle('active');
             });
 
             closeMenu.addEventListener('click', () => {
-                navMenu.classList.remove('active');
+                navMenuMobile.classList.remove('active');
+            });
+
+            // Function to close mobile menu
+            function closeMobileMenu() {
+                if (window.innerWidth <= 768) {
+                    navMenuMobile.classList.remove('active');
+                }
+            }
+
+            // Navigation function for service cards
+            function navigateToPage(event, url) {
+                event.preventDefault();
+                try {
+                    fetch(url)
+                        .then(response => {
+                            if (!response.ok) throw new Error('Page not found');
+                            window.location.href = url;
+                        })
+                        .catch(() => {
+                            document.getElementById('error-message').style.display = 'block';
+                            setTimeout(() => {
+                                document.getElementById('error-message').style.display = 'none';
+                            }, 3000);
+                        });
+                } catch {
+                    document.getElementById('error-message').style.display = 'block';
+                    setTimeout(() => {
+                        document.getElementById('error-message').style.display = 'none';
+                    }, 3000);
+                }
+            }
+
+            // Reset menu on page load
+            window.addEventListener('load', () => {
+                navMenuMobile.classList.remove('active');
             });
         });
     </script>
