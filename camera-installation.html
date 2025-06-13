@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Camera Installation - ChampTech Creations</title>
+    <link href="https://fonts.googleapis.com/css2?family=Georgia&family=Arial&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+    <style>
+        :root {
+            --primary-color: #28A745; /* Green */
+            --logo-color: #1E3A8A; /* Dark blue */
+            --glow-color: #1E90FF; /* Glowing blue */
+            --accent-color: #1DB954; /* Spotify green */
+            --text-color: #FFFFFF;
+            --section-bg: #121212; /* Spotify dark grey */
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(45deg, #121212, rgba(29, 185, 84, 0.1), #000000);
+            background-size: 200% 200%;
+            animation: gradientPulse 15s ease infinite;
+            color: var(--text-color);
+            line-height: 1.6;
+            width: 100%;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+
+        @keyframes gradientPulse {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; filter: brightness(1.1); }
+            100% { background-position: 0% 50%; }
+        }
+
+        header {
+            background: linear-gradient(to right, #121212, #1E3A8A);
+            padding: 20px 40px;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            animation: slideInHeader 1s ease-out;
+        }
+
+        @keyframes slideInHeader {
+            0% { transform: translateY(-100%); opacity: 0; }
+            100% { transform: translateY(0); opacity: 1; }
+        }
+
+        .header-content {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo-img {
+            height: 50px;
+            width: auto;
+            margin-right: 15px;
+            filter: hue-rotate(200deg);
+            animation: bounceLogo 2s infinite;
+        }
+
+        @keyframes bounceLogo {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .company-name {
+            color: var(--logo-color);
+            font-family: 'Georgia', serif;
+            font-size: 1.5em;
+            font-weight: bold;
+            text-shadow: 0 0 10px var(--glow-color);
+            animation: pulseGlow 1.5s infinite;
+        }
+
+        @keyframes pulseGlow {
+            0% { transform: scale(1); text-shadow: 0 0 10px var(--glow-color); }
+            50% { transform: scale(1.05); text-shadow: 0 0 20px var(--glow-color); }
+            100% { transform: scale(1); }
+        }
+
+        .social-icons a {
+            color: #FFFFFF;
+            margin-left: 10px;
+            transition: color 0.3s;
+            animation: fadeInSocial 1s ease-in;
+        }
+
+        @keyframes fadeInSocial {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
+        .social-icons a:hover {
+            color: var(--accent-color);
+        }
+
+        .menu-toggle {
+            display: none;
+            font-size: 1.5em;
+            cursor: pointer;
+            color: #FFFFFF;
+            animation: spinToggle 0.5s ease-out;
+        }
+
+        @keyframes spinToggle {
+            0% { transform: rotate(-180deg); opacity: 0; }
+            100% { transform: rotate(0deg); opacity: 1; }
+        }
+
+        .nav-menu ul {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-menu ul li {
+            margin-left: 20px;
+            animation: slideInNav 1s ease-out;
+        }
+
+        @keyframes slideInNav {
+            0% { transform: translateX(-50px); opacity: 0; }
+            100% { transform: translateX(0); opacity: 1; }
+        }
+
+        .nav-menu ul li a {
+            color: #FFFFFF;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .nav-menu ul li a:hover {
+            color: var(--accent-color);
+        }
+
+        .hero {
+            padding: 100px 0 30px;
+            text-align: center;
+            background: transparent;
+            margin-bottom: 20px;
+            position: relative;
+            overflow: hidden;
+            min-height: 300px;
+            animation: zoomInHero 1s ease-in;
+        }
+
+        @keyframes zoomInHero {
+            0% { transform: scale(0.8); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(30, 144, 255, 0.2) 0%, transparent 70%) repeat;
+            animation: waveEffect 6s infinite linear;
+        }
+
+        @keyframes waveEffect {
+            0% { background-position: 0 0; }
+            100% { background-position: 50% 50%; }
+        }
+
+        .hero h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            color: var(--glow-color);
+            text-transform: uppercase;
+        }
+
+        .hero p {
+            font-size: 1.2em;
+            color: var(--glow-color);
+        }
+
+        .section {
+            background: var(--section-bg);
+            margin-bottom: 20px;
+            padding: 40px 20px;
+            text-align: center;
+            animation: fadeInSection 1s ease-out;
+        }
+
+        @keyframes fadeInSection {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
+        h2 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            color: var(--primary-color);
+            text-shadow: 0 0 5px rgba(40, 167, 69, 0.5);
+            animation: slideDownTitle 1s ease-in;
+        }
+
+        @keyframes slideDownTitle {
+            0% { transform: translateY(-50px); opacity: 0; }
+            100% { transform: translateY(0); opacity: 1; }
+        }
+
+        .cards-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            animation: expandCards 1.5s ease-out;
+        }
+
+        @keyframes expandCards {
+            0% { transform: scale(0.5); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 15px;
+            border: 1px solid #2D2D2D;
+            border-radius: 10px;
+            width: 300px;
+            margin: 10px auto;
+            transition: transform 0.3s;
+            animation: popUpCard 1s ease-out;
+        }
+
+        @keyframes popUpCard {
+            0% { transform: translateY(50px); opacity: 0; }
+            100% { transform: translateY(0); opacity: 1; }
+        }
+
+        .card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 15px var(--accent-color);
+        }
+
+        .animated-icon {
+            width: 50px;
+            height: 50px;
+            margin-bottom: 10px;
+            animation: spinGlow 2s infinite;
+        }
+
+        @keyframes spinGlow {
+            0% { transform: rotate(0deg); filter: brightness(1); }
+            50% { transform: rotate(180deg); filter: brightness(1.5); }
+            100% { transform: rotate(360deg); filter: brightness(1); }
+        }
+
+        .booking-form {
+            max-width: 400px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+            animation: bounceForm 1s ease-out;
+        }
+
+        @keyframes bounceForm {
+            0% { transform: scale(0.7); opacity: 0; }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        .booking-form input, .booking-form button {
+            width: 100%;
+            margin-bottom: 15px;
+            padding: 10px;
+            border: 1px solid var(--primary-color);
+            border-radius: 5px;
+            font-size: 1em;
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--text-color);
+            animation: slideInField 1s ease-in;
+        }
+
+        @keyframes slideInField {
+            0% { transform: translateX(-100px); opacity: 0; }
+            100% { transform: translateX(0); opacity: 1; }
+        }
+
+        .booking-form button {
+            background: var(--primary-color);
+            color: #FFFFFF;
+            border: none;
+            cursor: pointer;
+            animation: pulseButton 2s infinite;
+        }
+
+        @keyframes pulseButton {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        .booking-form button:hover {
+            background: var(--accent-color);
+        }
+
+        .mobile-nav {
+            display: none;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background: var(--section-bg);
+            padding: 10px;
+            text-align: center;
+            animation: riseUpNav 1s ease-out;
+        }
+
+        @keyframes riseUpNav {
+            0% { transform: translateY(100%); opacity: 0; }
+            100% { transform: translateY(0); opacity: 1; }
+        }
+
+        .mobile-nav a {
+            margin: 0 15px;
+            color: var(--primary-color);
+            font-size: 1.5em;
+            animation: fadeInNav 1s ease-in;
+        }
+
+        @keyframes fadeInNav {
+            0% { transform: translateY(-50px); opacity: 0; }
+            100% { transform: translateY(0); opacity: 1; }
+        }
+
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+
+            .nav-menu {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 100%;
+                height: 100%;
+                background: var(--section-bg);
+                transition: right 0.3s ease;
+                animation: slideInMenu 0.5s ease-out forwards;
+            }
+
+            @keyframes slideInMenu {
+                0% { right: -100%; }
+                100% { right: 0; }
+            }
+
+            .nav-menu.active {
+                right: 0;
+            }
+
+            .nav-menu ul {
+                flex-direction: column;
+                padding: 20px;
+                margin-top: 60px;
+            }
+
+            .close-menu {
+                background: none;
+                border: none;
+                font-size: 1.5em;
+                position: absolute;
+                top: 10px;
+                right: 10px;
+                cursor: pointer;
+                color: #FFFFFF;
+                animation: spinClose 0.5s ease-out;
+            }
+
+            @keyframes spinClose {
+                0% { transform: rotate(-180deg); opacity: 0; }
+                100% { transform: rotate(0deg); opacity: 1; }
+            }
+
+            .mobile-nav {
+                display: flex;
+                justify-content: space-around;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <div class="logo">
+                <img src="camera-installation.html" alt="ChampTech Creations Logo" class="logo-img">
+            </div>
+            <h1 class="company-name">ChampTech Creations</h1>
+        </div>
+        <div class="social-icons">
+            <a href="#"><i class="fab fa-linkedin"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+        </div>
+        <div class="menu-toggle">☰</div>
+        <div class="nav-menu">
+            <button class="close-menu">X</button>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="index.html#portfolio">Portfolio</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <section class="hero" data-aos="fade-in">
+        <h1>Camera Installation Services</h1>
+        <p>Secure Your Space with Expert Solutions</p>
+    </section>
+
+    <section class="section" data-aos="zoom-in">
+        <h2>Our Installation Services</h2>
+        <div class="cards-container">
+            <div class="card">
+                <svg class="animated-icon" viewBox="0 0 100 100">
+                    <circle cx="50" cy="50" r="40" fill="none" stroke="#28A745">
+                        <animate attributeName="r" from="40" to="45" dur="1.5s" repeatCount="indefinite"/>
+                    </svg>
+                <h3>Indoor Camera Setup</h3>
+                <p>Install discreet cameras for home or office security.</p>
+            </div>
+            <div class="card">
+                <svg class="animated-icon" viewBox="0 0 100 100">
+                    <rect x="30" y="30" width="40" height="40" fill="none" stroke="#1DB954">
+                        <animateTransform attributeName="transform" type="rotate" from="0 50 50" to="360 50 50" dur="2s" repeatCount="indefinite"/>
+                    </svg>
+                <h3>Outdoor Surveillance</h3>
+                <p>Weatherproof cameras for external monitoring.</p>
+            </div>
+            <div class="card">
+                <svg class="animated-icon" viewBox="0 0 100 100">
+                    <polygon points="50,10 90,90 10,90" fill="none" stroke="#1E90FF">
+                        <animateTransform attributeName="transform" type="rotate" from="0 50 50" to="360 50 50" dur="2.5s" repeatCount="indefinite"/>
+                    </svg>
+                <h3>Multi-Camera Systems</h3>
+                <p>Comprehensive setups for large properties.</p>
+            </div>
+            <div class="card">
+                <svg class="animated-icon" viewBox="0 0 100 100">
+                    <ellipse cx="50" cy="50" rx="30" ry="20" fill="none" stroke="#28A745">
+                        <animate attributeName="rx" from="30" to="35" dur="1.8s" repeatCount="indefinite"/>
+                    </svg>
+                <h3>Remote Access Setup</h3>
+                <p>Monitor your cameras from anywhere via apps.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" data-aos="slide-up">
+        <h2>Benefits of Our Services</h2>
+        <div class="cards-container">
+            <div class="card">
+                <i class="fas fa-shield-alt" style="font-size: 2em; color: #28A745; animation: bounce 1s infinite;"></i>
+                <h3>Enhanced Security</h3>
+                <p>Protect your property 24/7 with advanced cameras.</p>
+            </div>
+            <div class="card">
+                <i class="fas fa-eye" style="font-size: 2em; color: #1DB954; animation: fadeIn 1s ease-in-out infinite alternate;"></i>
+                <h3>Real-Time Monitoring</h3>
+                <p>Watch live feeds from any device.</p>
+            </div>
+            <div class="card">
+                <i class="fas fa-lock" style="font-size: 2em; color: #1E90FF; animation: rotate 2s linear infinite;"></i>
+                <h3>Peace of Mind</h3>
+                <p>Deterrent effect against intruders.</p>
+            </div>
+            <div class="card">
+                <i class="fas fa-tools" style="font-size: 2em; color: #28A745; animation: pulse 1.5s infinite;"></i>
+                <h3>Professional Installation</h3>
+                <p>Expert setup tailored to your needs.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" data-aos="slide-right">
+        <h2>Our Process</h2>
+        <div class="cards-container">
+            <div class="card">
+                <i class="fas fa-search" style="font-size: 2em; color: #28A745; animation: zoomIn 1s ease-in-out infinite;"></i>
+                <h3>Site Assessment</h3>
+                <p>Evaluate your property for optimal camera placement.</p>
+            </div>
+            <div class="card">
+                <i class="fas fa-wrench" style="font-size: 2em; color: #1DB954; animation: slideIn 1s ease-out infinite alternate;"></i>
+                <h3>Installation</h3>
+                <p>Secure and efficient camera mounting.</p>
+            </div>
+            <div class="card">
+                <i class="fas fa-cogs" style="font-size: 2em; color: #1E90FF; animation: spinGlow 2s infinite;"></i>
+                <h3>Configuration</h3>
+                <p>Set up remote access and alerts.</p>
+            </div>
+            <div class="card">
+                <i class="fas fa-check" style="font-size: 2em; color: #28A745; animation: bounce 1.2s infinite;"></i>
+                <h3>Testing & Support</h3>
+                <p>Ensure functionality with ongoing assistance.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" data-aos="slide-left">
+        <h2>Why Choose Us</h2>
+        <div class="cards-container">
+            <div class="card">
+                <i class="fas fa-star" style="font-size: 2em; color: #1E90FF; animation: fadeIn 1s ease-in-out infinite alternate;"></i>
+                <h3>Expert Team</h3>
+                <p>Certified technicians with years of experience.</p>
+            </div>
+            <div class="card">
+                <i class="fas fa-truck" style="font-size: 2em; color: #1DB954; animation: rotate 2s linear infinite;"></i>
+                <h3>Fast Service</h3>
+                <p>Quick installation with minimal disruption.</p>
+            </div>
+            <div class="card">
+                <i class="fas fa-headset" style="font-size: 2em; color: #28A745; animation: pulse 1.5s infinite;"></i>
+                <h3>24/7 Support</h3>
+                <p>Round-the-clock customer assistance.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section booking-section" data-aos="fade-in">
+        <h2>Book a Camera Installation</h2>
+        <div class="booking-form">
+            <input type="text" placeholder="Your Name" required>
+            <input type="email" placeholder="Your Email" required>
+            <input type="tel" placeholder="Your Phone" required>
+            <button onclick="window.location.href='https://wa.me/265881103561?text=Hello%20I%20want%20to%20book%20a%20camera%20installation'">Book Now</button>
+        </div>
+    </section>
+
+    <div class="mobile-nav">
+        <a href="index.html"><i class="fas fa-home"></i></a>
+        <a href="#services"><i class="fas fa-cogs"></i></a>
+        <a href="index.html#portfolio"><i class="fas fa-briefcase"></i></a>
+        <a href="index.html#contact"><i class="fas fa-envelope"></i></a>
+    </div>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            AOS.init({
+                duration: 1000,
+                easing: 'ease-in-out',
+            });
+
+            const menuToggle = document.querySelector('.menu-toggle');
+            const navMenu = document.querySelector('.nav-menu');
+            const closeMenu = document.querySelector('.close-menu');
+
+            menuToggle.addEventListener('click', () => {
+                navMenu.classList.add('active');
+            });
+
+            closeMenu.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+            });
+        });
+    </script>
+</body>
+</html>
