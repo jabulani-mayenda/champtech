@@ -1,0 +1,1060 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blue Jay Schools</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+    <style>
+
+body {
+    background-color:rgba(13, 76, 14, 0.536);
+    /* Updated background gradient with more colors for a rainbow effect */
+    color: rgb(18, 17, 17);
+    width: 100%;
+    position: relative;
+    overflow-x: hidden;
+    box-sizing: border-box;
+}
+
+        .navbar-brand img {
+            max-height: 100px;
+        }
+
+        .navbar .title h1, .navbar .title h2 {
+            color: white;
+        }
+
+        .navbar .title h1 {
+            font-size: 1.5rem;
+        }
+
+        .navbar .title h2 {
+            font-size: 1rem;
+        }
+
+        @media (min-width: 768px) {
+            .navbar .title h1 {
+                font-size: 2rem;
+            }
+            .navbar .title h2 {
+                font-size: 1.25rem;
+            }
+        }
+
+        @media (min-width: 992px) {
+            .navbar .title h1 {
+                font-size: 2.5rem;
+            }
+            .navbar .title h2 {
+                font-size: 1.5rem;
+            }
+        }
+
+        .container1 {
+    background: rgba(0, 0, 0, 0.5);
+    padding: 50px;
+    border-radius: 10px;
+    width: 80%; /* Adjust width as needed */
+    margin: 0 auto; /* This centers the div horizontally */
+    align-items: center;
+    margin-top: 10PX;
+}
+
+        
+
+        .images {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 20px;
+            flex-wrap: wrap;
+           
+        }
+
+        .images img {
+            margin: 10px;
+            width: calc(33.33% - 20px);
+            height: auto;
+            width: 100px;
+            border-radius: 10px;
+            transition: transform 0.3s;
+            margin: 0px;
+        }
+
+        .images img:hover {
+            transform: scale(1.2);
+        }
+
+        .tabs {
+            list-style: none;
+            padding: 0;
+            text-align: center;
+        }
+
+        .tabs li {
+            display: inline;
+            margin: 0 10px;
+        }
+
+        .tabs a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.2em;
+        }
+
+        .social-links {
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 2em;
+            margin: 0 10px;
+        }
+
+        .flip-card-container {
+            background-color: #dcdcf818;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px auto;
+            max-width: 90%;
+        }
+
+        .flip-card {
+            background-color: transparent;
+            width: 100%;
+            margin-top: 20px;
+            height: 300px;
+            perspective: 1000px;
+        }
+
+        .flip-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+            box-shadow: 0 4px 8px 0 rgba(232, 89, 156, 0.2);
+        }
+
+        .flip-card:hover .flip-card-inner {
+            transform: rotateY(180deg);
+        }
+
+        .flip-card-front, .flip-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+        }
+
+        .flip-card-front img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .flip-card-back {
+            background: linear-gradient(to right, #1e3c72, #2a5298);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transform: rotateY(180deg);
+        }
+
+        .swiper {
+            width: 100%;
+            height: 500px;
+            margin-bottom: 20px;
+        }
+
+        .swiper-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .gallery-section {
+            padding: 50px 0;
+        }
+
+        .gallery-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+        }
+
+        
+
+        .curriculum-section {
+            padding: 50px 0;
+            background: linear-gradient(to right, #1e3c72, #2a5298);
+            color: white;
+        }
+
+        .curriculum-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+        }
+
+        .curriculum-section .card {
+            margin-bottom: 30px;
+            
+        }
+
+        .card img {
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .card-text {
+            background-color: white;
+        }
+
+        .game-container {
+            background-color: #f0f8ff;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px auto;
+            max-width: 90%;
+        }
+
+        .classroom-content {
+            background-color: rgb(48, 48, 135);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .classroom-content h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+
+        .list-group-item {
+            margin-bottom: 10px;
+        }
+     
+
+.video-section {
+    width: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.video-container {
+    width: 100%;
+    padding: 200px;
+    box-sizing: border-box;
+    text-align: center; /* Center align the videos */
+}
+
+.video-container .row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+
+@media (min-width: 992px) {
+    .video-container iframe {
+        width: 80%; /* Make videos take almost half the container width on large screens */
+    }
+}
+
+@media (max-width: 768px) {
+    .video-container iframe {
+        width: 100%; /* Make videos take full width on smaller screens */
+    }
+}
+
+
+        .sign-up-form {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 30px;
+            background: rgba(0, 0, 0, 0.5);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .sign-up-form input, .sign-up-form button {
+            width: 100%;
+            margin-bottom: 15px;
+        }
+
+        .footer {
+            background-color: #f8f9fa;
+            border-top: 1px solid #e7e7e7;
+            position: relative;
+            padding: 20px 0;
+        }
+
+        .footer p {
+            margin: 0;
+            padding: 10px;
+            font-size: 14px;
+        }
+
+        .footer .btn {
+            margin: 5px;
+        }
+
+        body.dark-mode {
+            background-color: #121212;
+            color: #ffffff;
+        }
+
+        body.dark-mode .navbar, body.dark-mode .footer {
+            background-color: #1f1f1f;
+            color: #ffffff;
+        }
+
+        body.dark-mode .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+
+        body.dark-mode .btn-secondary {
+            background-color: #6c757d;
+            border-color: #6c757d;
+        }
+
+        @media only screen and (max-width: 768px) {
+            .title h1 {
+                font-size: 2.5rem;
+            }
+            .title h2 {
+                font-size: 70%;
+            }
+            .navbar {
+                height: 80px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .partners {
+                align-items: center;
+            }
+            .logo-img {
+                max-width: 100px;
+               
+            }
+            .logo-text {
+                font-size: 25px !important;
+            }
+            .club-name {
+                font-size: 15px !important;
+            }
+        }
+
+        main {
+            padding-top: 0; /* Remove top padding */
+        }
+
+        .about-content {
+            padding: 20px;
+        }
+
+        .about-content h2 {
+            margin-bottom: 20px;
+        }
+
+        .about-content p {
+            margin-bottom: 15px;
+        }
+
+        .about-content .btn {
+            margin-top: 20px;
+        }  
+        /* For the title in .title div */
+.title {
+    text-align: center; /* Center align the content */
+}
+
+.title h1 {
+    font-size: 2.5rem; /* Default font size for h1 */
+}
+
+.title h2 {
+    font-size: 1.8rem; /* Default font size for h2 */
+}
+
+/* For h1 and h2 in .welcome class */
+.welcome {
+    text-align: center; /* Center align the content */
+}
+
+.welcome h1 {
+    font-size: 2.5rem; /* Default font size for h1 */
+}
+
+.welcome h2 {
+    font-size: 1.8rem; /* Default font size for h2 */
+}
+
+/* Media Queries for responsive design */
+@media (max-width: 992px) {
+   
+  
+    .welcome h1 {
+        font-size: 2rem; /* Adjust font size for h1 on medium screens */
+    }
+
+   
+}
+
+@media (max-width: 768px) {
+    
+
+    .welcome h1 {
+        font-size: 1.8rem; /* Adjust font size for h1 on small screens */
+    }
+
+  
+}
+/* For the title in .title div */
+.title {
+    text-align: center; /* Center align the content */
+}
+
+.title h1 {
+    font-size: 2.5rem; /* Default font size for h1 */
+}
+
+.title h2 {
+    font-size: 1.8rem; /* Default font size for h2 */
+}
+
+/* Media Queries for responsive design */
+@media (max-width: 992px) {
+    .title h1 {
+        font-size: 2rem; /* Adjust font size for h1 on medium screens */
+    }
+    
+    .title h2 {
+        font-size: 1.5rem; /* Adjust font size for h2 on medium screens */
+    }
+}
+
+@media (max-width: 768px) {
+    .title h1 {
+        font-size: 1.5rem; /* Adjust font size for h1 on small screens */
+        margin-top: 10px;
+        margin-left: -60px;
+    }
+    
+    .title h2 {
+        font-size: 1.0rem; /* Adjust font size for h2 on small screens */
+        margin-left: -60px;
+        margin-top: -10px;
+       
+    }
+}
+@media (max-width: 576px) {
+    .container-fluid {
+        padding-left: 10px;
+        padding-right: 10px;
+        height: 60px;
+        display: flex;
+        flex-wrap: wrap;
+    }
+    @media (max-width: 768px) {
+    .navbar-brand img {
+        max-height: 50px;
+       padding-left:20px;
+       margin-left: -20px;
+    }
+}
+
+}
+.flip-card-back {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+.flip-card-back h2 {
+    font-size: 16px;
+    margin: 0;
+}
+.short-text {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.full-text {
+    display: none;
+}
+
+.toggle-text {
+    margin-top: 10px;
+    display: block;
+}
+
+.fixed-icons {
+            position: fixed;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 1000;
+        }
+        .fixed-icons .whatsapp-icon {
+            left: 10px;
+        }
+        .fixed-icons .facebook-icon {
+            right: 10px;
+        }
+        .fixed-icons a {
+            display: block;
+            font-size: 2rem;
+            background-image: url(images/whatsapp.png);
+            background-size: cover;
+            padding: 10px;
+            border-radius: 50%;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+        .fixed-icons .facebook-icon a {
+            background-size:cover; /* Facebook blue color */
+            background-image: url(images/facebook.png);
+        }
+        .video-section {
+    width: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+/* Reset and general styles */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    background-color: #f2f2f2;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.video-section {
+    background-color: #fff;
+    margin-top: 40px;
+    padding: 40px 0;
+    text-align: center;
+}
+
+.section-title {
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.col-md-6 {
+    flex: 0 0 50%;
+    max-width: 50%;
+    padding: 10px;
+}
+
+.video-wrapper {
+    position: relative;
+    width: 100%;
+    padding-bottom: 56.25%; /* 16:9 aspect ratio (height is 56.25% of width) */
+    margin-bottom: 20px;
+    overflow: hidden;
+}
+
+.video-wrapper iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+
+
+    </style>
+
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg" style="background-color: #080000e2;">
+            <div class="container-fluid px-3 d-flex align-items-center justify-content-between" style="background-color: rgba(4, 208, 116, 0.585); border-radius: 40px;">
+               
+                    <a class="navbar-brand" href="#">
+                        <img src="images/logo.png" alt="Blue Jay School Logo" style="height: 200px;">
+                    </a>
+                <div class="title text-center mx-auto">
+                    <h1>Blue Jay Schools</h1>
+                    <h2>Molding Great Minds</h2>
+                </div>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                   <img src="images/menu.webp" style="height: 30px;margin-top:-0px ; " >
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav" >
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="#" style="color: white; background-color: rgba(4, 208, 116, 0.585); border-top-left-radius: 20px;border-top-right-radius: 20px; padding-left:20px;" >Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#about" style="color: white;background-color: rgba(4, 208, 116, 0.585);padding-left:20px;">About</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#curriculum" style="color: white;background-color: rgba(4, 208, 116, 0.585);padding-left: 20px;">Curriculum</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#gallery" style="color: white;background-color: rgba(4, 208, 116, 0.585);padding-left:20px; ">Gallery</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#videos" style="color: white;background-color: rgba(4, 208, 116, 0.585);padding-left:20px;">Videos</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#contact" style="color: white;background-color: rgba(4, 208, 116, 0.585);padding-left:20px;">Contact</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#sign-up" style="color: rgb(255, 226, 6);background-color: rgba(4, 208, 116, 0.585);border-bottom-left-radius:20px; border-bottom-right-radius: 20px; padding-left:20px;">Sign Up</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        
+        
+    </header>
+    <main>
+       
+        <div class="container1" style="right: 5%;">
+            <div class="welcome" style="margin-left: 10%;">
+                <h1>Welcome to Our Services</h1>
+                
+            </div>
+            <ul class="tabs">
+                <li><a href="day_care.html">DAY CARE</a></li> 
+                <li><a href="pre_school.html">PRE SCHOOL</a></li>
+                <li><a href="primary.html">PRIMARY 1-7</a></li>
+            </ul>
+           
+            <div class="images">
+                <img src="images/fun2.avif" alt="Image 1">
+                <img src="images/fun3.avif" alt="Image 2">
+                <img src="images/fun4.avif" alt="Image 3">
+            </div>
+        </div>
+    
+       
+            </div>
+        </div>
+        
+        <section id="about" class="about-contanier">
+            <!-- Fun About section -->
+<div class="about-contanier">
+    <div class="row">
+        <div class="col-lg-6">
+            <img src="images/icon.png" class="img-fluid" alt="About Us " style="height: 450px;width: 450px;">
+        </div>
+        <div class="col-lg-6">
+            <div class="about-content">
+                <h2 class="section-title">Welcome to Blue Jay Schools!</h2>
+                <p>Hey there, future Blue Jays! 🎉 We're not your ordinary school – we're a community of dreamers, creators, and adventurers!</p>
+                <p>Imagine a place where learning is like a thrilling rollercoaster ride, with surprises around every corner. At Blue Jay Schools, we believe in learning through play, exploration, and lots of laughter!</p>
+                <p>Our mission? To ignite your curiosity, spark your imagination, and unleash your inner genius! Join us on this epic adventure as we explore the wonders of the universe and discover the magic of learning!</p>
+                <a href="#" class="btn btn-primary">Ready to join the fun?</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="flip-card-container">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="flip-card">
+                <div class="flip-card-inner">
+                    <div class="flip-card-front">
+                        <img src="images/background1.jpg" alt="Image 1">
+                    </div>
+                    <div class="flip-card-back">
+                        <h2>Career Day Excitement
+                            One of our most cherished events at Blue Jay Primary School is Career Day. Captured in a delightful flip, a student is shown proudly dressed up as a scientist, complete with a lab coat and safety goggles. This image perfectly embodies the spirit of Career Day, where students are encouraged to explore their aspirations by dressing up as professionals from various fields. From astronauts and engineers to artists and chefs, our students get a chance to envision themselves in different roles. This day not only ignites their imagination but also provides them with a sense of direction and excitement about their future possibilities.</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="flip-card">
+                <div class="flip-card-inner">
+                    <div class="flip-card-front">
+                        <img src="images/gallery 4.jpg" alt="Image 2">
+                    </div>
+                    <div class="flip-card-back">
+                        <h2>School Uniform Pride
+                            In another engaging flip, we see a student confidently wearing the Blue Jay Primary School uniform. Our uniform symbolizes unity, equality, and a sense of belonging among our students. It eliminates any social barriers and allows our children to focus on their education and personal growth. Wearing the uniform fosters a sense of pride and responsibility, reminding students that they are part of a supportive and nurturing community. It helps instill discipline and a sense of identity, which are integral parts of our school's values and ethos.</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="flip-card">
+                <div class="flip-card-inner">
+                    <div class="flip-card-front">
+                        <img src="images/gallery 3.jpg" style="object-fit: cover;" alt="Image 3">
+                    </div>
+                    <div class="flip-card-back">
+                        <h2>The Joy of Learning
+                            The third flip captures a student engrossed in writing, a testament to the engaging and dynamic learning environment at Blue Jay Primary School. Whether it's crafting stories in language arts, solving problems in math, or exploring scientific concepts, our students are encouraged to express their thoughts and ideas creatively. This flip highlights the dedication and enthusiasm our students bring to their studies. With the guidance of our passionate teachers, students develop essential skills such as critical thinking, creativity, and effective communication. This commitment to active learning ensures that our students are well-prepared for their academic journey and beyond.</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div
+
+        </section>
+        <!-- Curriculum section -->
+        <div class="curriculum-container">
+            <h2 class="curriculum-title">Explore Our Curriculum</h2>
+            <div class="row">
+                <!-- Curriculum cards -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="card">
+                        <img src="images/Curriculum 1.jpg" class="card-img-top" alt="Mathematics">
+                        <div class="card-body">
+                            <h5 class="card-title">Career Day at Blue Jay Primary School</h5>
+                            <p class="card-text short-text">At Blue Jay Primary School, Career Day is a highly anticipated event that aims to inspire our young students by introducing them to a variety of professions.</p>
+                            <p class="card-text full-text">Each year, we invite professionals from diverse fields to share their experiences and insights with our students. From doctors and engineers to artists and chefs, our guests provide a glimpse into the wide array of career paths available. Students have the opportunity to ask questions, participate in interactive demonstrations, and even try their hand at different activities related to each profession. Career Day is designed to spark curiosity and help students start thinking about their future ambitions and the steps they can take to achieve them.</p>
+                            <button class="btn btn-primary toggle-text">Learn More</button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Repeat for other cards -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="card">
+                        <img src="images/curriculum 2.jpg" class="card-img-top" alt="Science">
+                        <div class="card-body">
+                            <h5 class="card-title">Academic Life at Blue Jay Primary School</h5>
+                            <p class="card-text short-text">At Blue Jay Primary School, our regular classes are designed to provide a well-rounded education that nurtures the intellectual and personal growth of each student.</p>
+                            <p class="card-text full-text">In our math classes, students develop critical thinking and problem-solving skills through engaging lessons and hands-on activities. Our curriculum also includes subjects like science, language arts, social studies, and physical education, ensuring a balanced approach to learning. With a focus on creativity and collaboration, our teachers employ innovative teaching methods to make learning enjoyable and effective. By fostering a love for learning and encouraging curiosity, we aim to prepare our students for future academic success and lifelong learning.</p>
+                            <button class="btn btn-primary toggle-text">Learn More</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="card">
+                        <img src="images/curriculum 3.jpg" class="card-img-top" alt="Arts">
+                        <div class="card-body">
+                            <h5 class="card-title">Cultural Day at Blue Jay Primary School</h5>
+                            <p class="card-text short-text">Cultural Day at Blue Jay Primary School is a vibrant celebration of the rich diversity within our community.</p>
+                            <p class="card-text full-text">This event is dedicated to honoring the different cultures and traditions that make up our student body. On Cultural Day, students and their families are encouraged to share their heritage through traditional clothing, music, dance, and food. Classrooms are transformed into cultural exhibits, where students can learn about the customs, languages, and histories of different countries. This day fosters an environment of inclusivity and respect, allowing students to appreciate the beauty of cultural diversity and gain a deeper understanding of the world around them.</p>
+                            <button class="btn btn-primary toggle-text">Learn More</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <section id="curriculum" class="curriculum-section">
+            <div class="container">
+                <!-- Curriculum content goes here -->
+            </div>
+        </section>
+        <!-- Gallery Section -->
+        <section id="gallery" class="gallery-section">
+            <div class="container">
+                <h2 class="gallery-title">Gallery</h2>
+                <p class="gallery-description">Take a look at some of the highlights from our school activities, events, and student achievements. Our gallery showcases the vibrant and dynamic community at Blue Jay Schools.</p>
+                <div class="swiper-container gallery-swiper">
+                    <div class="swiper" style="margin: 0;padding: 0;width: 100%; top: 80px;">
+        <div class="swiper-wrapper">
+            
+            <div class="swiper-slide"><img src="images/gallery 1.jpg"></div>
+            <div class="swiper-slide"><img src="images/gallery 6.jpg"></div>
+            <div class="swiper-slide"><img src="images/curriculum 3.jpg"></div>
+            <div class="swiper-slide"><img src="images/curriculum 4.jpg"></div>
+            <div class="swiper-slide"><img src="images/gallery5.jpg"></div>
+            <div class="swiper-slide"><img src="images/images 2.jpg"></div>
+        </div>
+        
+        <div class="swiper-pagination"></div>
+        
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
+    </div>
+            </div>
+        </section>
+        
+       <!-- Videos Section -->
+       <section id="videos" class="video-section">
+        <div class="container">
+            <h2 class="section-title mb-4">Videos</h2>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="video-wrapper">
+                        <iframe src="https://www.youtube.com/embed/VQ0uJHK1DWs" title="All Signs Lead to the Bestest Day Ever 🦋 | Bluey" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="video-wrapper">
+                        <iframe src="https://www.youtube.com/embed/oxrN-oyUCvs" title="Every Goo Lagoon Moment EVER! 🏖️ | 30 Minute Compilation | SpongeBob" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+        
+</section>
+<section id="games" class="game-container">
+    <h2 class="section-title">Interactive Learning Games</h2>
+    <div class="row">
+        <div class="col-lg-4">
+            <div class="game-card">
+                <img src="images/vecteezy_math-icon-with-kids-and-math-tools_.jpg" class="img-fluid" alt="Game 1">
+                <h3>Math Challenge</h3>
+                <p>Test your math skills with fun challenges.</p>
+                <a href="https://www.googleadservices.com/pagead/aclk?sa=L&ai=DChcSEwja7IXzwMaGAxXbk1AGHfBmCj4YABABGgJkZw&ase=2&gclid=CjwKCAjwvIWzBhAlEiwAHHWgvavgjnKeeXluwoBvLNM2scZpnF3RW8koz38EtBeyQDFtoan1pahM9hoCbQcQAvD_BwE&ohost=www.google.com&cid=CAESVeD2Jvyb2LoDJUiZGM4ec77BViQ3-uMXJE0OQdm5G4Ops9fu3ytjctrqRXmpj6noEIR5XWrqmWEy3D2Ory39JM4dsc8SybHmr5jYhh7kvdwtiKqpSLw&sig=AOD64_2uUyXtbuojknKs0y-B18HE126cDw&q&nis=4&adurl&ved=2ahUKEwjbmIDzwMaGAxXHVUEAHRcDAb4Q0Qx6BAgKEAM" class="btn btn-primary">Play Now</a>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="game-card">
+                <img src="images/zw8c_rxz1_210623_generated.jpg" class="img-fluid" alt="Game 2">
+                <h3>Science Explorer</h3>
+                <p>Explore the wonders of science.</p>
+                <a href="https://pbskids.org/games/science" class="btn btn-primary">Play Now</a>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="game-card">
+                <img src="images/history_book_generated.jpg" class="img-fluid" alt="Game 3">
+                <h3>History Quest</h3>
+                <p>Embark on a quest through history.</p>
+                <a href="https://www.youtube.com/watch?v=9wtC1EuDlBE&list=PLZS3MUjYqjUFuynZEzXXOMF3koo024l_0" class="btn btn-primary">Play Now</a>
+            </div>
+        </div>
+    </div>
+</section>
+<div class="fixed-icons">
+    <div class="whatsapp-icon" >
+        <a href="https://wa.me/+265888860463" target="_blank"><i class="fab fa-whatsapp"></i></a>
+        
+    </div>
+    <div class="facebook-icon">
+        <a href="https://facebook.com/yourprofile" target="_blank"><i class="fab fa-facebook-f"></i></a>
+        
+    </div>
+</div>
+
+
+        <section id="videos" class="video-section">
+            <div class="video-container">
+                <!-- Videos content goes here -->
+            </div>
+        </section>
+       <!-- Contact Section -->
+<section id="contact" class="py-5">
+    <div class="container">
+        <h2 class="section-title mb-4">Contact Us</h2>
+        <div class="row">
+            <div class="col-md-6">
+                <!-- Contact Form -->
+                <form action="#" method="POST">
+                    <div class="form-group">
+                        <label for="name">Your Name:</label>
+                        <input type="text" id="name" name="name" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Your Email:</label>
+                        <input type="email" id="email" name="email" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Your Message:</label>
+                        <textarea id="message" name="message" class="form-control" rows="5" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Send Message</button>
+                </form>
+            </div>
+            <div class="col-md-6">
+                <!-- Contact Information -->
+                <h4>Contact Information</h4>
+                <p>Address: Your Address</p>
+                <p>Email: your.email@example.com</p>
+                <p>Phone: +1234567890</p>
+            </div>
+        </div>
+    </div>
+</section>
+<section id="virtual-classroom" class="container mt-5">
+    <h2 class="section-title">Virtual Classroom</h2>
+    <div class="classroom-content">
+        <h3>Join a Live Class</h3>
+        <a href="virtual-classroom/live-class.html" class="btn btn-primary">Join Now</a>
+        <h3 class="mt-4">Recorded Lessons</h3>
+        <div class="list-group">
+            <a href="https://www.youtube.com/watch?v=mjlsSYLLOSE&pp=ygUhbWF0aHMgbGVzc29uZyBmb3Iga2lkcyBvZiBhZ2VzIDQt" class="list-group-item list-group-item-action">Lesson 1: Introduction to Math</a>
+            <a href="https://www.youtube.com/watch?v=lv6dC0coQeI&pp=ygUrc2NpZW5jZSBiYXNpY3MgZm9yIGtpZHMgZm9yIGtpZHMgb2YgYWdlcyA0LQ%3D%3D" class="list-group-item list-group-item-action">Lesson 2: Science Basics</a>
+            <a href="virtual-classroom/lesson3.html" class="list-group-item list-group-item-action">Lesson 3: History Overview</a>
+        </div>
+    </div>
+</section>
+
+
+        <section id="contact" class="container mt-5">
+            <!-- Contact content goes here -->
+        </section>
+        <!-- Sign Up Section -->
+        <section id="sign-up" class="sign-up-section">
+            <div class="container">
+                <!-- Sign up content goes here -->
+            </div>
+        </section>
+              <form id="signUpForm" class="sign-up-form">
+                    <div class="form-group">
+                        <label for="fullName">Full Name</label>
+                        <input type="text" class="form-control" id="fullName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" class="form-control" id="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Phone Number</label>
+                        <input type="tel" class="form-control" id="phone" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+        </section>
+        </div>
+    </div>
+    </main>
+    <footer class="container mt-5 pt-3">
+        <footer class="footer mt-5 py-3">
+    <div class="container text-center">
+        <p>&copy; <span id="currentYear"></span> Your School Name. All rights reserved.</p>
+        <button id="scrollToTop" class="btn btn-primary">Scroll to Top</button>
+        <button id="toggleDarkMode" class="btn btn-secondary">Toggle Dark Mode</button>
+    </div>
+</footer>
+    </footer>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function() {
+            const images = document.querySelectorAll(".images img");
+            images.forEach(img => {
+                img.addEventListener("mouseover", function() {
+                    img.style.transform = "scale(1.2)";
+                });
+                img.addEventListener("mouseout", function() {
+                    img.style.transform = "scale(1)";
+                });
+            });
+
+            // Function to scroll to top
+            document.getElementById('scrollToTop').addEventListener('click', function() {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+
+            // Toggle dark mode
+            const toggleDarkModeButton = document.getElementById('toggleDarkMode');
+            toggleDarkModeButton.addEventListener('click', function() {
+                document.body.classList.toggle('dark-mode');
+            });
+
+            // Update current year in footer
+            document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+            // WhatsApp link
+            const signUpForm = document.getElementById('signUpForm');
+            signUpForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const fullName = document.getElementById('fullName').value;
+                const email = document.getElementById('email').value;
+                const phone = document.getElementById('phone').value;
+                const message = `Hello, my name is ${fullName}. My email is ${email} and my phone number is ${phone}. I am interested in learning more about Blue Jay Schools.`;
+                const whatsappLink = `https://api.whatsapp.com/send?phone=1234567890&text=${encodeURIComponent(message)}`;
+                window.open(whatsappLink, '_blank');
+            });
+
+            // Initialize Swiper
+            var swiper = new Swiper('.swiper', {
+                slidesPerView: 1,
+                spaceBetween: 10,
+                navigation: {
+                    nextEl: '.swiper-button-next',
+                    prevEl: '.swiper-button-prev',
+                },
+                pagination: {
+                    el: '.swiper-pagination',
+                    clickable: true,
+                },
+                autoplay: {
+                    delay: 3000,
+                    disableOnInteraction: false,
+                },
+            });
+        });
+        document.addEventListener("DOMContentLoaded", function() {
+    function adjustFontSize(element) {
+        let fontSize = parseInt(window.getComputedStyle(element).fontSize);
+        const maxHeight = element.clientHeight;
+
+        while (element.scrollHeight > maxHeight && fontSize > 10) {
+            fontSize -= 1;
+            element.style.fontSize = fontSize + 'px';
+        }
+    }
+
+    const flipCardBacks = document.querySelectorAll(".flip-card-back h2");
+
+    flipCardBacks.forEach(adjustFontSize);
+});
+document.addEventListener("DOMContentLoaded", function() {
+    const toggleButtons = document.querySelectorAll('.toggle-text');
+
+    toggleButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const cardBody = button.parentElement;
+            const shortText = cardBody.querySelector('.short-text');
+            const fullText = cardBody.querySelector('.full-text');
+
+            if (fullText.style.display === "none") {
+                fullText.style.display = "block";
+                shortText.style.display = "none";
+                button.textContent = "Show Less";
+            } else {
+                fullText.style.display = "none";
+                shortText.style.display = "block";
+                button.textContent = "Learn More";
+            }
+        });
+    });
+});
+
+
+
+    </script>
+</body>
+
+
+</html>
+
+
