@@ -3,10 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ChampTech Creations</title>
+    <title>Camera Installation - ChampTech Creations</title>
     <link href="https://fonts.googleapis.com/css2?family=Georgia&family=Arial&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
     <style>
         :root {
             --primary-color: #28A745; /* Green */
@@ -22,7 +21,7 @@
             padding: 0;
             box-sizing: border-box;
             font-family: 'Arial', sans-serif;
-            -webkit-tap-highlight-color: transparent; /* Prevent mobile tap highlight */
+            -webkit-tap-highlight-color: transparent;
         }
 
         body {
@@ -49,7 +48,7 @@
             position: fixed;
             width: 100%;
             top: 0;
-            z-index: 1000;
+            z-index: 1001;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -73,6 +72,18 @@
             font-size: 1.3em;
             font-weight: bold;
             text-shadow: 0 0 10px var(--glow-color);
+            opacity: 0;
+            transform: translateY(-20px);
+            animation: slideInGlow 25s ease forwards;
+        }
+
+        @keyframes slideInGlow {
+            0% { opacity: 0; transform: translateY(-20px); text-shadow: 0 0 5px var(--glow-color); }
+            20% { opacity: 0.5; transform: translateY(0); text-shadow: 0 0 10px var(--glow-color); }
+            40% { opacity: 0.8; text-shadow: 0 0 15px var(--glow-color); }
+            60% { opacity: 1; text-shadow: 0 0 20px var(--glow-color); }
+            80% { text-shadow: 0 0 15px var(--glow-color); }
+            100% { opacity: 1; transform: translateY(0); text-shadow: 0 0 10px var(--glow-color); }
         }
 
         .social-icons a {
@@ -86,43 +97,44 @@
             color: var(--accent-color);
         }
 
-        .menu-toggle {
-            display: none;
-            font-size: 1.5em;
-            cursor: pointer;
-            color: #FFFFFF;
+        .hero, .why-choose-us, .how-we-work, .services, .contact {
+            background: var(--section-bg);
+            margin-bottom: 20px;
+            padding: 30px 15px;
+            text-align: center;
+            opacity: 0;
         }
 
-        .nav-menu {
-            display: block;
+        h2 {
+            font-size: 2em;
+            margin-bottom: 15px;
+            color: var(--primary-color);
         }
 
-        .nav-menu ul {
-            display: flex;
-            list-style: none;
+        /* Animations for Each Section */
+        @keyframes bounceIn {
+            0% { opacity: 0; transform: scale(0.5); }
+            50% { transform: scale(1.05); }
+            100% { opacity: 1; transform: scale(1); }
         }
 
-        .nav-menu ul li {
-            margin-left: 15px;
+        @keyframes fadeInUp {
+            to { opacity: 1; transform: translateY(0); }
         }
 
-        .nav-menu ul li a {
-            color: #FFFFFF;
-            text-decoration: none;
-            font-size: 1em;
-            transition: color 0.3s;
+        @keyframes slideInLeft {
+            to { opacity: 1; transform: translateX(0); }
         }
 
-        .nav-menu ul li a:hover {
-            color: var(--accent-color);
+        @keyframes zoomIn {
+            to { opacity: 1; transform: scale(1); }
         }
 
         .hero {
-            padding: 100px 20px 30px; /* Increased top padding for desktop */
-            text-align: center;
-            background: var(--section-bg);
-            margin-bottom: 20px;
+            padding-top: 100px;
             min-height: 300px;
+            animation: bounceIn 1s ease forwards;
+            transform: scale(0.5);
         }
 
         .hero h1 {
@@ -137,20 +149,59 @@
             color: var(--logo-color);
         }
 
-        .services, .portfolio, .contact, .why-choose-us, .about-us, .testimonials, .blog-preview {
-            background: var(--section-bg);
-            margin-bottom: 20px;
-            padding: 30px 15px;
+        .why-choose-us {
+            animation: fadeInUp 0.8s ease forwards;
+            transform: translateY(50px);
+        }
+
+        .why-choose-us .reasons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        .reason-card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 15px;
+            border: 1px solid #2D2D2D;
+            border-radius: 10px;
+            width: 100%;
+            max-width: 250px;
             text-align: center;
         }
 
-        h2 {
-            font-size: 2em;
-            margin-bottom: 15px;
-            color: var(--primary-color);
+        .how-we-work {
+            animation: slideInLeft 0.8s ease forwards;
+            transform: translateX(-100px);
         }
 
-        .service-cards, .reasons, .team-members, .blog-posts {
+        .how-we-work .steps {
+            text-align: left;
+            max-width: 600px;
+            margin: 20px auto;
+        }
+
+        .step {
+            margin: 15px 0;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .step:before {
+            content: "•";
+            color: var(--primary-color);
+            position: absolute;
+            left: 0;
+        }
+
+        .services {
+            animation: zoomIn 0.8s ease forwards;
+            transform: scale(0.9);
+        }
+
+        .service-cards {
             display: flex;
             justify-content: center;
             gap: 15px;
@@ -179,37 +230,9 @@
             margin-bottom: 10px;
         }
 
-        .swiper-container {
-            width: 100%;
-            max-width: 500px;
-            margin: 0 auto;
-            height: 300px;
-            overflow: hidden;
-        }
-
-        .swiper-slide img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border-radius: 10px;
-        }
-
-        .team-member img {
-            max-width: 80px;
-            max-height: 80px;
-            border-radius: 50%;
-            margin-bottom: 10px;
-        }
-
-        .testimonial-bubble {
-            background: rgba(45, 45, 45, 0.8);
-            padding: 15px;
-            border-radius: 10px;
-            margin: 10px 0;
-            text-align: left;
-            max-width: 500px;
-            margin-left: auto;
-            margin-right: auto;
+        .contact {
+            animation: fadeInUp 0.8s ease forwards;
+            transform: translateY(50px);
         }
 
         .contact form {
@@ -247,7 +270,6 @@
         }
 
         .mobile-nav {
-            display: none;
             position: fixed;
             bottom: 0;
             width: 100%;
@@ -255,12 +277,14 @@
             padding: 10px;
             text-align: center;
             z-index: 1000;
+            display: flex;
+            justify-content: space-around;
         }
 
         .mobile-nav a {
-            margin: 0 12px;
             color: var(--primary-color);
             font-size: 1.3em;
+            text-decoration: none;
         }
 
         .error-message {
@@ -272,74 +296,11 @@
         }
 
         @media (max-width: 768px) {
-            header {
-                padding: 15px;
-            }
-
-            .logo-img {
-                height: 35px;
-            }
-
-            .company-name {
-                font-size: 1.2em;
-            }
-
-            .social-icons a {
-                margin-left: 5px;
-                font-size: 1em;
-            }
-
-            .menu-toggle {
-                display: block;
-            }
-
-            .nav-menu {
-                position: fixed;
-                top: 0;
-                right: -100%;
-                width: 80%;
-                height: 100%;
-                background: var(--section-bg);
-                transition: right 0.3s ease;
-                z-index: 999;
-            }
-
-            .nav-menu.active {
-                right: 0;
-            }
-
-            .nav-menu ul {
-                flex-direction: column;
-                padding: 15px;
-                margin-top: 60px;
-            }
-
-            .nav-menu ul li {
-                margin: 10px 0;
-            }
-
-            .nav-menu ul li a {
-                font-size: 1.2em;
-            }
-
-            .close-menu {
-                background: none;
-                border: none;
-                font-size: 1.5em;
-                position: absolute;
-                top: 15px;
-                right: 15px;
-                cursor: pointer;
-                color: #FFFFFF;
-            }
-
-            .mobile-nav {
-                display: flex;
-                justify-content: space-around;
+            .hero, .why-choose-us, .how-we-work, .services, .contact {
+                padding: 80px 15px 20px;
             }
 
             .hero {
-                padding: 80px 15px 20px; /* Increased top padding to avoid header overlap */
                 min-height: 250px;
             }
 
@@ -351,17 +312,9 @@
                 font-size: 0.9em;
             }
 
-            .services, .portfolio, .contact, .why-choose-us, .about-us, .testimonials, .blog-preview {
-                padding: 20px 10px;
-            }
-
-            .service-card {
+            .reason-card, .service-card {
                 width: 90%;
                 margin: 10px auto;
-            }
-
-            .swiper-container {
-                height: 250px;
             }
         }
     </style>
@@ -370,7 +323,7 @@
     <header>
         <div class="header-content">
             <div class="logo">
-                <img src="images/logo.jpg" alt="ChampTech Creations Logo" class="logo-img">
+                <img src="images/WhatsApp Image 2025-06-13 at 13.04.15_89c06f46.jpg" alt="ChampTech Creations Logo" class="logo-img">
             </div>
             <h1 class="company-name">ChampTech Creations</h1>
         </div>
@@ -379,61 +332,79 @@
             <a href="#"><i class="fab fa-twitter"></i></a>
             <a href="#"><i class="fab fa-instagram"></i></a>
         </div>
-        <div class="menu-toggle">☰</div>
-        <div class="nav-menu">
-            <button class="close-menu">X</button>
-            <ul>
-                <li><a href="#home">Home</a></li>
-                <li><a href="#services">Services</a></li>
-                <li><a href="#portfolio">Portfolio</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-        </div>
     </header>
 
     <section id="home" class="hero">
-        <h1>Welcome to ChampTech Creations</h1>
-        <p>Innovative Tech Solutions for the Future</p>
+        <h1>Camera Installation Services</h1>
+        <p>Secure Your Space with Expert Solutions</p>
+    </section>
+
+    <section id="why-choose-us" class="why-choose-us">
+        <h2>Why Choose Us</h2>
+        <p>Discover why ChampTech Creations is your trusted partner in security.</p>
+        <div class="reasons">
+            <div class="reason-card">
+                <h3>Expert Technicians</h3>
+                <p>Certified professionals with years of experience.</p>
+            </div>
+            <div class="reason-card">
+                <h3>Custom Installations</h3>
+                <p>Tailored solutions for homes, offices, and businesses.</p>
+            </div>
+            <div class="reason-card">
+                <h3>High-Quality Equipment</h3>
+                <p>Top-tier cameras and systems for optimal security.</p>
+            </div>
+            <div class="reason-card">
+                <h3>Reliable Support</h3>
+                <p>24/7 assistance and maintenance services.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="how-we-work" class="how-we-work">
+        <h2>How We Work</h2>
+        <p>Our structured process ensures top-notch camera installations.</p>
+        <div class="steps">
+            <div class="step">1. Assessment: We evaluate your security needs and site.</div>
+            <div class="step">2. Design: We plan the camera layout and system setup.</div>
+            <div class="step">3. Installation: We install and configure the equipment.</div>
+            <div class="step">4. Testing: We test the system for performance and coverage.</div>
+            <div class="step">5. Support: We provide ongoing maintenance and support.</div>
+        </div>
     </section>
 
     <section id="services" class="services">
-        <h2>Our Services</h2>
+        <h2>Our Camera Installation Services</h2>
         <div class="service-cards">
-            <a href="digitalmarketin.html" class="service-card">
+            <div class="service-card">
                 <svg class="animated-icon" viewBox="0 0 100 100">
                     <circle cx="50" cy="50" r="40" fill="none" stroke="#28A745" stroke-width="5"/>
                 </svg>
-                <h3>Digital Marketing</h3>
-                <p>Boost your online presence with targeted campaigns.</p>
-            </a>
-            <a href="webdevelopment.html" class="service-card">
+                <h3>Indoor Cameras</h3>
+                <p>High-resolution indoor surveillance with night vision.</p>
+            </div>
+            <div class="service-card">
                 <svg class="animated-icon" viewBox="0 0 100 100">
                     <circle cx="50" cy="50" r="40" fill="none" stroke="#28A745" stroke-width="5"/>
                 </svg>
-                <h3>Web Development</h3>
-                <p>Create stunning, responsive websites for your business.</p>
-            </a>
-            <a href="camera-installation.html" class="service-card">
+                <h3>Outdoor Cameras</h3>
+                <p>Weather-resistant cameras with motion detection.</p>
+            </div>
+            <div class="service-card">
                 <svg class="animated-icon" viewBox="0 0 100 100">
                     <rect x="30" y="30" width="40" height="40" fill="none" stroke="#1DB954" stroke-width="5"/>
                 </svg>
-                <h3>Camera Installation</h3>
-                <p>Secure your space with expert surveillance solutions.</p>
-            </a>
-        </div>
-        <div class="error-message" id="error-message">Sorry, that page is not available. Please contact us for more info.</div>
-    </section>
-
-    <section id="portfolio" class="portfolio">
-        <h2>Our Portfolio</h2>
-        <div class="swiper-container">
-            <div class="swiper-wrapper">
-                <div class="swiper-slide"><img src="images/blue.jpg" alt="Project 1"></div>
-                <div class="swiper-slide"><img src="images/flyer.jpg" alt="Project 2"></div>
-                <div class="swiper-slide"><img src="images/good.jpg" alt="Project 3"></div>
+                <h3>Maintenance</h3>
+                <p>Regular checks and repairs to ensure system uptime.</p>
             </div>
-            <div class="swiper-button-next"></div>
-            <div class="swiper-button-prev"></div>
+            <div class="service-card">
+                <svg class="animated-icon" viewBox="0 0 100 100">
+                    <polygon points="50,10 90,90 10,90" fill="none" stroke="#28A745" stroke-width="5"/>
+                </svg>
+                <h3>Smart Integration</h3>
+                <p>Connect cameras to smart home or business systems.</p>
+            </div>
         </div>
     </section>
 
@@ -453,88 +424,32 @@
             <button type="submit">Send to WhatsApp</button>
         </form>
         <p>Email: mayendajabulani@gmail.com | WhatsApp: 0881103561 | Address: Blantyre Mpemba</p>
-        <a href="https://wa.me/265881103561?text=Hello%20I%20want%20to%20book%20a%20consultation" class="whatsapp-btn">WhatsApp Us</a>
+        <a href="https://wa.me/265881103561?text=Hello%20I%20want%20to%20book%20a%20camera%20installation%20consultation" class="whatsapp-btn">WhatsApp Us</a>
     </section>
 
     <div class="mobile-nav">
-        <a href="#home"><i class="fas fa-home"></i></a>
-        <a href="#services"><i class="fas fa-cogs"></i></a>
-        <a href="#portfolio"><i class="fas fa-briefcase"></i></a>
-        <a href="#contact"><i class="fas fa-envelope"></i></a>
+        <a href="index.html"><i class="fas fa-home"></i></a>
+        <a href="digitalmarketing.html"><i class="fas fa-cogs"></i></a>
+        <a href="webdevelopment.html"><i class="fas fa-briefcase"></i></a>
+        <a href="camerainstallation.html"><i class="fas fa-envelope"></i></a>
     </div>
 
-    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            const menuToggle = document.querySelector('.menu-toggle');
-            const navMenu = document.querySelector('.nav-menu');
-            const closeMenu = document.querySelector('.close-menu');
-
-            menuToggle.addEventListener('click', (e) => {
-                e.preventDefault();
-                navMenu.classList.add('active');
-            });
-
-            closeMenu.addEventListener('click', (e) => {
-                e.preventDefault();
-                navMenu.classList.remove('active');
-            });
-
-            // Close menu when clicking a link
-            navMenu.querySelectorAll('a').forEach(link => {
-                link.addEventListener('click', () => {
-                    navMenu.classList.remove('active');
-                });
-            });
-
-            var swiper = new Swiper('.swiper-container', {
-                loop: false,
-                slidesPerView: 1,
-                autoplay: {
-                    delay: 0,
-                    speed: 800,
-                    disableOnInteraction: false
-                },
-                navigation: {
-                    nextEl: '.swiper-button-next',
-                    prevEl: '.swiper-button-prev'
-                }
-            });
-
-            // Prevent multiple rapid clicks on mobile
-            let isProcessing = false;
-            document.querySelectorAll('.service-card').forEach(card => {
-                card.addEventListener('click', (e) => {
-                    if (isProcessing) {
-                        e.preventDefault();
-                        return;
+            const sections = document.querySelectorAll('.hero, .why-choose-us, .how-we-work, .services, .contact');
+            function checkScroll() {
+                sections.forEach(section => {
+                    const sectionPosition = section.getBoundingClientRect().top;
+                    const screenPosition = window.innerHeight / 1.3;
+                    if (sectionPosition < screenPosition) {
+                        section.style.animationPlayState = 'running';
                     }
-                    isProcessing = true;
-
-                    const href = card.getAttribute('href');
-                    fetch(href, { method: 'HEAD' })
-                        .then(response => {
-                            isProcessing = false;
-                            if (!response.ok) {
-                                e.preventDefault();
-                                document.getElementById('error-message').style.display = 'block';
-                                setTimeout(() => {
-                                    document.getElementById('error-message').style.display = 'none';
-                                }, 3000);
-                            } else {
-                                window.location.href = href; // Navigate if page exists
-                            }
-                        })
-                        .catch(() => {
-                            isProcessing = false;
-                            e.preventDefault();
-                            document.getElementById('error-message').style.display = 'block';
-                            setTimeout(() => {
-                                document.getElementById('error-message').style.display = 'none';
-                            }, 3000);
-                        });
                 });
-            });
+            }
+            window.addEventListener('scroll', checkScroll);
+            // Trigger hero animation on load
+            document.querySelector('.hero').style.animationPlayState = 'running';
+            checkScroll(); // Trigger other animations on load if in view
         });
     </script>
 </body>
