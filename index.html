@@ -11,7 +11,7 @@
     <style>
         :root {
             --primary-color: #28A745; /* Green */
-            --logo-color: #1E3A8A; /* Dark blue */
+            --logo-color: #00FF00; /* Bright green for company name */
             --glow-color: #1E90FF; /* Glowing blue */
             --accent-color: #1DB954; /* Spotify green */
             --text-color: #FFFFFF;
@@ -82,7 +82,7 @@
             100% { transform: scale(1); }
         }
 
-        .social-icons a {
+        .social.icons a {
             color: #FFFFFF;
             margin-left: 10px;
             transition: color 0.3s;
@@ -97,6 +97,10 @@
             font-size: 1.5em;
             cursor: pointer;
             color: #FFFFFF;
+        }
+
+        .nav-menu {
+            display: block;
         }
 
         .nav-menu ul {
@@ -121,42 +125,22 @@
         .hero {
             padding: 100px 0 30px;
             text-align: center;
-            background: transparent;
+            background: var(--section-bg);
             margin-bottom: 20px;
             position: relative;
-            overflow: hidden;
             min-height: 400px;
         }
 
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle, rgba(30, 144, 255, 0.1) 0%, transparent 70%) repeat;
-            animation: particleWave 6s infinite linear;
-            z-index: -1;
-        }
-
-        @keyframes particleWave {
-            0% { background-position: 0 0, 0 0; }
-            100% { background-position: 100% 100%, 0 0; }
-        }
-
         .hero h1 {
-            font-size: 2.5em; /* Further reduced size */
+            font-size: 2em;
             margin-bottom: 10px;
-            color: var(--glow-color); /* Blue color */
+            color: var(--logo-color);
             text-transform: uppercase;
-            animation: none; /* Removed animation */
         }
 
         .hero p {
-            font-size: 1.2em; /* Further reduced size */
-            color: var(--glow-color); /* Blue color */
-            animation: none; /* Removed animation */
+            font-size: 1em;
+            color: var(--logo-color);
         }
 
         .services, .portfolio, .contact, .why-choose-us, .about-us, .testimonials, .blog-preview {
@@ -180,16 +164,18 @@
             flex-wrap: wrap;
         }
 
-        .service-card, .reason-box, .team-member, .blog-post {
+        .service-card {
             background: rgba(255, 255, 255, 0.05);
             padding: 15px;
             border: 1px solid #2D2D2D;
             border-radius: 10px;
             width: 250px;
             transition: transform 0.3s, box-shadow 0.3s;
+            text-decoration: none;
+            color: var(--text-color);
         }
 
-        .service-card:hover, .reason-box:hover, .team-member:hover, .blog-post:hover {
+        .service-card:hover {
             transform: scale(1.05);
             box-shadow: 0 0 15px var(--accent-color);
         }
@@ -293,6 +279,14 @@
             font-size: 1.5em;
         }
 
+        .error-message {
+            display: none;
+            color: #FF5555;
+            text-align: center;
+            margin-top: 20px;
+            font-size: 1.2em;
+        }
+
         @media (max-width: 768px) {
             .menu-toggle {
                 display: block;
@@ -302,7 +296,7 @@
                 position: fixed;
                 top: 0;
                 right: -100%;
-                width: 100%;
+                width: 80%;
                 height: 100%;
                 background: var(--section-bg);
                 transition: right 0.3s ease;
@@ -384,8 +378,8 @@
                         <animate attributeName="r" from="40" to="45" dur="1s" repeatCount="indefinite"/>
                     </circle>
                 </svg>
-                <h3>webdevelopment</h3>
-                <p>Boost your online presence with targeted campaigns.</p>
+                <h3>Web Development</h3>
+                <p>Create stunning, responsive websites for your business.</p>
             </a>
             <a href="camera-installation.html" class="service-card" data-aos="fade-in" data-aos-delay="400">
                 <svg class="animated-icon" viewBox="0 0 100 100">
@@ -397,6 +391,7 @@
                 <p>Secure your space with expert surveillance solutions.</p>
             </a>
         </div>
+        <div class="error-message" id="error-message">Sorry, that page is not available. Please contact us for more info.</div>
     </section>
 
     <section id="portfolio" class="portfolio" data-aos="zoom-in">
@@ -446,17 +441,17 @@
         <div class="team-members">
             <div class="team-member" data-aos="zoom-in" data-aos-delay="200">
                 <img src="images/me1.jpg" alt="Developer">
-                <h4>jabulani mayenda - Developer</h4>
+                <h4>Jabulani Mayenda - Developer</h4>
                 <p>Expert in building robust software solutions.</p>
             </div>
             <div class="team-member" data-aos="zoom-in" data-aos-delay="400">
-                <img src="images/me 2.jpg" alt="Digital Marketer">
+                <img src="images/me2.jpg" alt="Digital Marketer">
                 <h4>Benson - Digital Marketer</h4>
                 <p>Specializes in boosting online visibility.</p>
             </div>
             <div class="team-member" data-aos="zoom-in" data-aos-delay="600">
                 <img src="images/treasure.jpg" alt="Multimedia Specialist">
-                <h4>treasure mayenda- Multimedia Specialist</h4>
+                <h4>Treasure Mayenda - Multimedia Specialist</h4>
                 <p>Creates stunning video and graphic content.</p>
             </div>
             <div class="team-member" data-aos="zoom-in" data-aos-delay="800">
@@ -508,8 +503,9 @@
             <input type="tel" name="phone" placeholder="Your Phone" required>
             <select name="service" required>
                 <option value="">Select Service</option>
-                <option value="digital-marketing">Digital Marketing</option>
-                <option value="camera-installation">Camera Installation</option>
+                <option value="digitalmarketing">Digital Marketing</option>
+                <option value="webdevelopment">Web Development</option>
+                <option value="camerainstallation">Camera Installation</option>
             </select>
             <textarea name="message" placeholder="Your Message" required></textarea>
             <button type="submit">Send to WhatsApp</button>
@@ -532,6 +528,7 @@
             AOS.init({
                 duration: 1000,
                 easing: 'ease-in-out',
+                once: true // Prevent animations from replaying on scroll
             });
 
             const menuToggle = document.querySelector('.menu-toggle');
@@ -539,7 +536,7 @@
             const closeMenu = document.querySelector('.close-menu');
 
             menuToggle.addEventListener('click', () => {
-                navMenu.classList.add('active');
+                navMenu.classList.toggle('active');
             });
 
             closeMenu.addEventListener('click', () => {
@@ -556,7 +553,32 @@
                 navigation: {
                     nextEl: '.swiper-button-next',
                     prevEl: '.swiper-button-prev',
-                },
+                }
+            });
+
+            // Handle service link clicks
+            document.querySelectorAll('.service-card').forEach(link => {
+                link.addEventListener('click', (e) => {
+                    const href = link.getAttribute('href');
+                    // Check if the page exists by attempting to load it
+                    fetch(href, { method: 'HEAD' })
+                        .then(response => {
+                            if (!response.ok) {
+                                e.preventDefault();
+                                document.getElementById('error-message').style.display = 'block';
+                                setTimeout(() => {
+                                    document.getElementById('error-message').style.display = 'none';
+                                }, 3000);
+                            }
+                        })
+                        .catch(() => {
+                            e.preventDefault();
+                            document.getElementById('error-message').style.display = 'block';
+                            setTimeout(() => {
+                                document.getElementById('error-message').style.display = 'none';
+                            }, 3000);
+                        });
+                });
             });
         });
     </script>
