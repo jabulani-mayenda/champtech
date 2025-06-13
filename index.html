@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ChampTech Creations</title>
     <link href="https://fonts.googleapis.com/css2?family=Georgia&family=Arial&display=swap" rel="stylesheet">
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
     <style>
@@ -23,6 +22,7 @@
             padding: 0;
             box-sizing: border-box;
             font-family: 'Arial', sans-serif;
+            -webkit-tap-highlight-color: transparent; /* Prevent mobile tap highlight */
         }
 
         body {
@@ -45,7 +45,7 @@
 
         header {
             background: linear-gradient(to right, #121212, #1E3A8A);
-            padding: 20px 40px;
+            padding: 20px;
             position: fixed;
             width: 100%;
             top: 0;
@@ -61,30 +61,24 @@
         }
 
         .logo-img {
-            height: 50px;
+            height: 40px;
             width: auto;
-            margin-right: 15px;
+            margin-right: 10px;
             filter: hue-rotate(200deg);
         }
 
         .company-name {
             color: var(--logo-color);
             font-family: 'Georgia', serif;
-            font-size: 1.5em;
+            font-size: 1.3em;
             font-weight: bold;
-            text-shadow: 0 0 10px var(--glow-color), 0 0 20px var(--glow-color), 0 0 30px var(--glow-color);
-            animation: pulse 1.5s infinite;
+            text-shadow: 0 0 10px var(--glow-color);
         }
 
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
-        }
-
-        .social.icons a {
+        .social-icons a {
             color: #FFFFFF;
-            margin-left: 10px;
+            margin-left: 8px;
+            font-size: 1.2em;
             transition: color 0.3s;
         }
 
@@ -109,12 +103,13 @@
         }
 
         .nav-menu ul li {
-            margin-left: 20px;
+            margin-left: 15px;
         }
 
         .nav-menu ul li a {
             color: #FFFFFF;
             text-decoration: none;
+            font-size: 1em;
             transition: color 0.3s;
         }
 
@@ -123,12 +118,11 @@
         }
 
         .hero {
-            padding: 100px 0 30px;
+            padding: 100px 20px 30px; /* Increased top padding for desktop */
             text-align: center;
             background: var(--section-bg);
             margin-bottom: 20px;
-            position: relative;
-            min-height: 400px;
+            min-height: 300px;
         }
 
         .hero h1 {
@@ -146,21 +140,20 @@
         .services, .portfolio, .contact, .why-choose-us, .about-us, .testimonials, .blog-preview {
             background: var(--section-bg);
             margin-bottom: 20px;
-            padding: 40px 20px;
+            padding: 30px 15px;
             text-align: center;
         }
 
         h2 {
-            font-size: 2.5em;
-            margin-bottom: 20px;
+            font-size: 2em;
+            margin-bottom: 15px;
             color: var(--primary-color);
-            text-shadow: 0 0 5px rgba(40, 167, 69, 0.5);
         }
 
         .service-cards, .reasons, .team-members, .blog-posts {
             display: flex;
             justify-content: center;
-            gap: 20px;
+            gap: 15px;
             flex-wrap: wrap;
         }
 
@@ -169,28 +162,28 @@
             padding: 15px;
             border: 1px solid #2D2D2D;
             border-radius: 10px;
-            width: 250px;
-            transition: transform 0.3s, box-shadow 0.3s;
+            width: 100%;
+            max-width: 250px;
             text-decoration: none;
             color: var(--text-color);
+            transition: transform 0.3s;
         }
 
         .service-card:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 15px var(--accent-color);
+            transform: scale(1.03);
         }
 
         .animated-icon {
-            width: 50px;
-            height: 50px;
+            width: 40px;
+            height: 40px;
             margin-bottom: 10px;
         }
 
         .swiper-container {
             width: 100%;
-            max-width: 600px;
+            max-width: 500px;
             margin: 0 auto;
-            height: 400px;
+            height: 300px;
             overflow: hidden;
         }
 
@@ -202,8 +195,8 @@
         }
 
         .team-member img {
-            max-width: 100px;
-            max-height: 100px;
+            max-width: 80px;
+            max-height: 80px;
             border-radius: 50%;
             margin-bottom: 10px;
         }
@@ -213,44 +206,34 @@
             padding: 15px;
             border-radius: 10px;
             margin: 10px 0;
-            position: relative;
             text-align: left;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-        }
-
-        .testimonial-bubble::before {
-            content: "";
-            position: absolute;
-            top: -10px;
-            left: 20px;
-            border-width: 0 10px 10px 10px;
-            border-style: solid;
-            border-color: transparent transparent rgba(45, 45, 45, 0.8) transparent;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         .contact form {
             display: flex;
             flex-direction: column;
-            max-width: 400px;
+            max-width: 350px;
             margin: 0 auto;
             background: rgba(255, 255, 255, 0.05);
-            padding: 20px;
+            padding: 15px;
             border-radius: 10px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
         }
 
         .contact input, .contact select, .contact textarea {
-            margin-bottom: 15px;
-            padding: 10px;
+            margin-bottom: 10px;
+            padding: 8px;
             border: 1px solid var(--primary-color);
             border-radius: 5px;
-            font-size: 1em;
+            font-size: 0.9em;
             background: rgba(255, 255, 255, 0.1);
             color: var(--text-color);
         }
 
         .contact button {
-            padding: 10px;
+            padding: 8px;
             background: var(--primary-color);
             color: #FFFFFF;
             border: none;
@@ -271,23 +254,41 @@
             background: var(--section-bg);
             padding: 10px;
             text-align: center;
+            z-index: 1000;
         }
 
         .mobile-nav a {
-            margin: 0 15px;
+            margin: 0 12px;
             color: var(--primary-color);
-            font-size: 1.5em;
+            font-size: 1.3em;
         }
 
         .error-message {
             display: none;
             color: #FF5555;
             text-align: center;
-            margin-top: 20px;
-            font-size: 1.2em;
+            margin-top: 15px;
+            font-size: 1em;
         }
 
         @media (max-width: 768px) {
+            header {
+                padding: 15px;
+            }
+
+            .logo-img {
+                height: 35px;
+            }
+
+            .company-name {
+                font-size: 1.2em;
+            }
+
+            .social-icons a {
+                margin-left: 5px;
+                font-size: 1em;
+            }
+
             .menu-toggle {
                 display: block;
             }
@@ -300,6 +301,7 @@
                 height: 100%;
                 background: var(--section-bg);
                 transition: right 0.3s ease;
+                z-index: 999;
             }
 
             .nav-menu.active {
@@ -308,8 +310,16 @@
 
             .nav-menu ul {
                 flex-direction: column;
-                padding: 20px;
+                padding: 15px;
                 margin-top: 60px;
+            }
+
+            .nav-menu ul li {
+                margin: 10px 0;
+            }
+
+            .nav-menu ul li a {
+                font-size: 1.2em;
             }
 
             .close-menu {
@@ -317,8 +327,8 @@
                 border: none;
                 font-size: 1.5em;
                 position: absolute;
-                top: 10px;
-                right: 10px;
+                top: 15px;
+                right: 15px;
                 cursor: pointer;
                 color: #FFFFFF;
             }
@@ -327,6 +337,32 @@
                 display: flex;
                 justify-content: space-around;
             }
+
+            .hero {
+                padding: 80px 15px 20px; /* Increased top padding to avoid header overlap */
+                min-height: 250px;
+            }
+
+            .hero h1 {
+                font-size: 1.8em;
+            }
+
+            .hero p {
+                font-size: 0.9em;
+            }
+
+            .services, .portfolio, .contact, .why-choose-us, .about-us, .testimonials, .blog-preview {
+                padding: 20px 10px;
+            }
+
+            .service-card {
+                width: 90%;
+                margin: 10px auto;
+            }
+
+            .swiper-container {
+                height: 250px;
+            }
         }
     </style>
 </head>
@@ -334,7 +370,7 @@
     <header>
         <div class="header-content">
             <div class="logo">
-                <img src="images/WhatsApp Image 2025-06-13 at 13.04.15_89c06f46.jpg" alt="ChampTech Creations Logo" class="logo-img">
+                <img src="images/logo.jpg" alt="ChampTech Creations Logo" class="logo-img">
             </div>
             <h1 class="company-name">ChampTech Creations</h1>
         </div>
@@ -355,37 +391,31 @@
         </div>
     </header>
 
-    <section id="home" class="hero" data-aos="fade-in">
+    <section id="home" class="hero">
         <h1>Welcome to ChampTech Creations</h1>
         <p>Innovative Tech Solutions for the Future</p>
     </section>
 
-    <section id="services" class="services" data-aos="slide-up">
+    <section id="services" class="services">
         <h2>Our Services</h2>
         <div class="service-cards">
-            <a href="digitalmarketin.html" class="service-card" data-aos="fade-in" data-aos-delay="200">
+            <a href="digitalmarketin.html" class="service-card">
                 <svg class="animated-icon" viewBox="0 0 100 100">
-                    <circle cx="50" cy="50" r="40" fill="none" stroke="#28A745" stroke-width="5">
-                        <animate attributeName="r" from="40" to="45" dur="1s" repeatCount="indefinite"/>
-                    </circle>
+                    <circle cx="50" cy="50" r="40" fill="none" stroke="#28A745" stroke-width="5"/>
                 </svg>
                 <h3>Digital Marketing</h3>
                 <p>Boost your online presence with targeted campaigns.</p>
             </a>
-            <a href="webdevelopment.html" class="service-card" data-aos="fade-in" data-aos-delay="200">
+            <a href="webdevelopment.html" class="service-card">
                 <svg class="animated-icon" viewBox="0 0 100 100">
-                    <circle cx="50" cy="50" r="40" fill="none" stroke="#28A745" stroke-width="5">
-                        <animate attributeName="r" from="40" to="45" dur="1s" repeatCount="indefinite"/>
-                    </circle>
+                    <circle cx="50" cy="50" r="40" fill="none" stroke="#28A745" stroke-width="5"/>
                 </svg>
                 <h3>Web Development</h3>
                 <p>Create stunning, responsive websites for your business.</p>
             </a>
-            <a href="camera-installation.html" class="service-card" data-aos="fade-in" data-aos-delay="400">
+            <a href="camera-installation.html" class="service-card">
                 <svg class="animated-icon" viewBox="0 0 100 100">
-                    <rect x="30" y="30" width="40" height="40" fill="none" stroke="#1DB954" stroke-width="5">
-                        <animateTransform attributeName="transform" type="rotate" from="0 50 50" to="360 50 50" dur="2s" repeatCount="indefinite"/>
-                    </rect>
+                    <rect x="30" y="30" width="40" height="40" fill="none" stroke="#1DB954" stroke-width="5"/>
                 </svg>
                 <h3>Camera Installation</h3>
                 <p>Secure your space with expert surveillance solutions.</p>
@@ -394,7 +424,7 @@
         <div class="error-message" id="error-message">Sorry, that page is not available. Please contact us for more info.</div>
     </section>
 
-    <section id="portfolio" class="portfolio" data-aos="zoom-in">
+    <section id="portfolio" class="portfolio">
         <h2>Our Portfolio</h2>
         <div class="swiper-container">
             <div class="swiper-wrapper">
@@ -407,95 +437,7 @@
         </div>
     </section>
 
-    <section id="why-choose-us" class="why-choose-us" data-aos="slide-up">
-        <h2>Why Choose Us</h2>
-        <div class="reasons">
-            <div class="reason-box" data-aos="fade-in" data-aos-delay="200">
-                <i class="fas fa-users"></i>
-                <h3>Expert Team</h3>
-                <p>Our professionals deliver top-notch services with expertise.</p>
-            </div>
-            <div class="reason-box" data-aos="fade-in" data-aos-delay="400">
-                <i class="fas fa-headset"></i>
-                <h3>24/7 Support</h3>
-                <p>We're here anytime to ensure your satisfaction.</p>
-            </div>
-            <div class="reason-box" data-aos="fade-in" data-aos-delay="600">
-                <i class="fas fa-lightbulb"></i>
-                <h3>Innovative Technology</h3>
-                <p>We use cutting-edge tools to enhance your experience.</p>
-            </div>
-            <div class="reason-box" data-aos="fade-in" data-aos-delay="800">
-                <i class="fas fa-thumbs-up"></i>
-                <h3>Customer Satisfaction</h3>
-                <p>Your happiness drives everything we do.</p>
-            </div>
-        </div>
-    </section>
-
-    <section id="about-us" class="about-us" data-aos="slide-up">
-        <h2>About Us</h2>
-        <h3>How We Started</h3>
-        <p>ChampTech Creations began in Blantyre Mpemba with a passion for technology and design, aiming to empower businesses with innovative solutions.</p>
-        <h3>Our Team</h3>
-        <div class="team-members">
-            <div class="team-member" data-aos="zoom-in" data-aos-delay="200">
-                <img src="images/me1.jpg" alt="Developer">
-                <h4>Jabulani Mayenda - Developer</h4>
-                <p>Expert in building robust software solutions.</p>
-            </div>
-            <div class="team-member" data-aos="zoom-in" data-aos-delay="400">
-                <img src="images/me2.jpg" alt="Digital Marketer">
-                <h4>Benson - Digital Marketer</h4>
-                <p>Specializes in boosting online visibility.</p>
-            </div>
-            <div class="team-member" data-aos="zoom-in" data-aos-delay="600">
-                <img src="images/treasure.jpg" alt="Multimedia Specialist">
-                <h4>Treasure Mayenda - Multimedia Specialist</h4>
-                <p>Creates stunning video and graphic content.</p>
-            </div>
-            <div class="team-member" data-aos="zoom-in" data-aos-delay="800">
-                <img src="https://via.placeholder.com/150x150?text=Network+Specialist" alt="Network Specialist">
-                <h4>Bob Lee - Network Specialist</h4>
-                <p>Ensures seamless network connectivity.</p>
-            </div>
-        </div>
-    </section>
-
-    <section id="testimonials" class="testimonials" data-aos="slide-up">
-        <h2>What Our Clients Say</h2>
-        <div class="testimonial-bubble">
-            <p>"ChampTech Creations transformed our online presence. Highly recommend!"</p>
-            <h4>- Satisfied Client</h4>
-        </div>
-        <div class="testimonial-bubble">
-            <p>"Their services are top-notch and the team is incredibly responsive."</p>
-            <h4>- Happy Customer</h4>
-        </div>
-    </section>
-
-    <section id="blog-preview" class="blog-preview" data-aos="slide-up">
-        <h2>Latest Blog Posts</h2>
-        <div class="blog-posts">
-            <div class="blog-post">
-                <h3>Digital Marketing Trends 2025</h3>
-                <p>Stay ahead with the latest trends in digital marketing.</p>
-                <a href="#">Read More</a>
-            </div>
-            <div class="blog-post">
-                <h3>Security Tips for Businesses</h3>
-                <p>Learn how to protect your business with our expert tips.</p>
-                <a href="#">Read More</a>
-            </div>
-            <div class="blog-post">
-                <h3>Web Development Best Practices</h3>
-                <p>Discover the best practices for creating stunning websites.</p>
-                <a href="#">Read More</a>
-            </div>
-        </div>
-    </section>
-
-    <section id="contact" class="contact" data-aos="slide-up">
+    <section id="contact" class="contact">
         <h2>Contact Us</h2>
         <form action="https://zapier.com/webhook/your-webhook-url" method="POST">
             <input type="text" name="name" placeholder="Your Name" required>
@@ -521,57 +463,70 @@
         <a href="#contact"><i class="fas fa-envelope"></i></a>
     </div>
 
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            AOS.init({
-                duration: 1000,
-                easing: 'ease-in-out',
-                once: true // Prevent animations from replaying on scroll
-            });
-
             const menuToggle = document.querySelector('.menu-toggle');
             const navMenu = document.querySelector('.nav-menu');
             const closeMenu = document.querySelector('.close-menu');
 
-            menuToggle.addEventListener('click', () => {
-                navMenu.classList.toggle('active');
+            menuToggle.addEventListener('click', (e) => {
+                e.preventDefault();
+                navMenu.classList.add('active');
             });
 
-            closeMenu.addEventListener('click', () => {
+            closeMenu.addEventListener('click', (e) => {
+                e.preventDefault();
                 navMenu.classList.remove('active');
             });
 
+            // Close menu when clicking a link
+            navMenu.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    navMenu.classList.remove('active');
+                });
+            });
+
             var swiper = new Swiper('.swiper-container', {
-                loop: true,
+                loop: false,
                 slidesPerView: 1,
                 autoplay: {
-                    delay: 3000,
-                    disableOnInteraction: false,
+                    delay: 0,
+                    speed: 800,
+                    disableOnInteraction: false
                 },
                 navigation: {
                     nextEl: '.swiper-button-next',
-                    prevEl: '.swiper-button-prev',
+                    prevEl: '.swiper-button-prev'
                 }
             });
 
-            // Handle service link clicks
-            document.querySelectorAll('.service-card').forEach(link => {
-                link.addEventListener('click', (e) => {
-                    const href = link.getAttribute('href');
-                    // Check if the page exists by attempting to load it
+            // Prevent multiple rapid clicks on mobile
+            let isProcessing = false;
+            document.querySelectorAll('.service-card').forEach(card => {
+                card.addEventListener('click', (e) => {
+                    if (isProcessing) {
+                        e.preventDefault();
+                        return;
+                    }
+                    isProcessing = true;
+
+                    const href = card.getAttribute('href');
                     fetch(href, { method: 'HEAD' })
                         .then(response => {
+                            isProcessing = false;
                             if (!response.ok) {
                                 e.preventDefault();
                                 document.getElementById('error-message').style.display = 'block';
                                 setTimeout(() => {
                                     document.getElementById('error-message').style.display = 'none';
                                 }, 3000);
+                            } else {
+                                window.location.href = href; // Navigate if page exists
                             }
                         })
                         .catch(() => {
+                            isProcessing = false;
                             e.preventDefault();
                             document.getElementById('error-message').style.display = 'block';
                             setTimeout(() => {
