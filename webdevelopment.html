@@ -5,13 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Web Development - ChampTech Creations</title>
     <link href="https://fonts.googleapis.com/css2?family=Georgia&family=Arial&display=swap" rel="stylesheet">
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
     <style>
         :root {
             --primary-color: #28A745; /* Green */
-            --logo-color: #1E3A8A; /* Dark blue */
+            --logo-color: #00FF00; /* Bright green for company name */
             --glow-color: #1E90FF; /* Glowing blue */
             --accent-color: #1DB954; /* Spotify green */
             --text-color: #FFFFFF;
@@ -23,12 +21,13 @@
             padding: 0;
             box-sizing: border-box;
             font-family: 'Arial', sans-serif;
+            -webkit-tap-highlight-color: transparent;
         }
 
         body {
             background: linear-gradient(45deg, #121212, rgba(29, 185, 84, 0.1), #000000);
             background-size: 200% 200%;
-            animation: gradientShift 15s ease infinite;
+            animation: gradientFlow 15s ease infinite;
             color: var(--text-color);
             line-height: 1.6;
             width: 100%;
@@ -37,28 +36,22 @@
             overflow-x: hidden;
         }
 
-        @keyframes gradientShift {
+        @keyframes gradientFlow {
             0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; filter: brightness(1.1); }
+            50% { background-position: 100% 50%; }
             100% { background-position: 0% 50%; }
         }
 
         header {
             background: linear-gradient(to right, #121212, #1E3A8A);
-            padding: 20px 40px;
+            padding: 20px;
             position: fixed;
             width: 100%;
             top: 0;
-            z-index: 1001; /* Higher z-index to stay above content */
+            z-index: 1001;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            animation: fadeInTop 1s ease-out;
-        }
-
-        @keyframes fadeInTop {
-            0% { opacity: 0; transform: translateY(-20px); }
-            100% { opacity: 1; transform: translateY(0); }
         }
 
         .header-content {
@@ -67,371 +60,261 @@
         }
 
         .logo-img {
-            height: 50px;
+            height: 40px;
             width: auto;
-            margin-right: 15px;
+            margin-right: 10px;
             filter: hue-rotate(200deg);
-            animation: floatLogo 2s infinite;
-        }
-
-        @keyframes floatLogo {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-8px); }
         }
 
         .company-name {
             color: var(--logo-color);
             font-family: 'Georgia', serif;
-            font-size: 1.5em;
+            font-size: 1.3em;
             font-weight: bold;
             text-shadow: 0 0 10px var(--glow-color);
-            animation: glowText 1.5s infinite;
+            opacity: 0;
+            transform: translateY(-20px);
+            animation: slideInGlow 25s ease forwards;
         }
 
-        @keyframes glowText {
-            0% { text-shadow: 0 0 10px var(--glow-color); }
-            50% { text-shadow: 0 0 20px var(--glow-color), 0 0 5px var(--glow-color); }
-            100% { text-shadow: 0 0 10px var(--glow-color); }
+        @keyframes slideInGlow {
+            0% { opacity: 0; transform: translateY(-20px); text-shadow: 0 0 5px var(--glow-color); }
+            20% { opacity: 0.5; transform: translateY(0); text-shadow: 0 0 10px var(--glow-color); }
+            40% { opacity: 0.8; text-shadow: 0 0 15px var(--glow-color); }
+            60% { opacity: 1; text-shadow: 0 0 20px var(--glow-color); }
+            80% { text-shadow: 0 0 15px var(--glow-color); }
+            100% { opacity: 1; transform: translateY(0); text-shadow: 0 0 10px var(--glow-color); }
         }
 
         .social-icons a {
             color: #FFFFFF;
-            margin-left: 10px;
+            margin-left: 8px;
+            font-size: 1.2em;
             transition: color 0.3s;
-            animation: popInSocial 1s ease-in;
-        }
-
-        @keyframes popInSocial {
-            0% { transform: scale(0); opacity: 0; }
-            100% { transform: scale(1); opacity: 1; }
         }
 
         .social-icons a:hover {
             color: var(--accent-color);
         }
 
-        .menu-toggle {
-            display: none;
-            font-size: 1.5em;
-            cursor: pointer;
-            color: #FFFFFF;
-            animation: rotateIn 0.5s ease-out;
-            z-index: 1002; /* Ensure toggle stays above menu */
-        }
-
-        @keyframes rotateIn {
-            0% { transform: rotate(-180deg); opacity: 0; }
-            100% { transform: rotate(0deg); opacity: 1; }
-        }
-
-        .nav-menu {
-            position: fixed;
-            top: 0;
-            right: -100%;
-            width: 100%;
-            height: 100%;
+        .hero, .why-choose-us, .how-we-work, .services, .contact {
             background: var(--section-bg);
-            transition: right 0.3s ease;
-            z-index: 1000; /* Below header but above content */
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-start;
+            margin-bottom: 20px;
+            padding: 30px 15px;
+            text-align: center;
+            opacity: 0;
         }
 
-        .nav-menu.active {
-            right: 0;
+        h2 {
+            font-size: 2em;
+            margin-bottom: 15px;
+            color: var(--primary-color);
         }
 
-        .nav-menu ul {
-            list-style: none;
-            margin-top: 60px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+        /* Animations for Each Section */
+        @keyframes bounceIn {
+            0% { opacity: 0; transform: scale(0.5); }
+            50% { transform: scale(1.05); }
+            100% { opacity: 1; transform: scale(1); }
         }
 
-        .nav-menu ul li {
-            margin: 20px 0;
-            animation: slideInLinks 1s ease-out;
+        @keyframes fadeInUp {
+            to { opacity: 1; transform: translateY(0); }
         }
 
-        @keyframes slideInLinks {
-            0% { transform: translateX(-40px); opacity: 0; }
-            100% { transform: translateX(0); opacity: 1; }
+        @keyframes slideInLeft {
+            to { opacity: 1; transform: translateX(0); }
         }
 
-        .nav-menu ul li a {
-            color: #FFFFFF;
-            text-decoration: none;
-            font-size: 1.2em;
-            transition: color 0.3s;
-        }
-
-        .nav-menu ul li a:hover {
-            color: var(--accent-color);
-        }
-
-        .close-menu {
-            background: none;
-            border: none;
-            font-size: 1.5em;
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            cursor: pointer;
-            color: #FFFFFF;
-            animation: spinOut 0.5s ease-out;
-            z-index: 1001; /* Above menu content */
-        }
-
-        @keyframes spinOut {
-            0% { transform: rotate(180deg); opacity: 0; }
-            100% { transform: rotate(0deg); opacity: 1; }
+        @keyframes zoomIn {
+            to { opacity: 1; transform: scale(1); }
         }
 
         .hero {
-            padding: 100px 0 30px;
-            text-align: center;
-            background: transparent;
-            margin-bottom: 20px;
-            position: relative;
-            overflow: hidden;
+            padding-top: 100px;
             min-height: 300px;
-            z-index: 0; /* Ensure content is below header */
-            animation: scaleUpHero 1s ease-in;
-        }
-
-        @keyframes scaleUpHero {
-            0% { transform: scale(0.9); opacity: 0; }
-            100% { transform: scale(1); opacity: 1; }
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle, rgba(30, 144, 255, 0.2) 0%, transparent 70%) repeat;
-            animation: pulseWave 6s infinite linear;
-        }
-
-        @keyframes pulseWave {
-            0% { background-position: 0 0; }
-            50% { background-position: 25% 25%; filter: brightness(1.2); }
-            100% { background-position: 0 0; }
+            animation: bounceIn 1s ease forwards;
+            transform: scale(0.5);
         }
 
         .hero h1 {
-            font-size: 2.5em;
+            font-size: 2em;
             margin-bottom: 10px;
-            color: var(--glow-color);
+            color: var(--logo-color);
             text-transform: uppercase;
         }
 
         .hero p {
-            font-size: 1.2em;
-            color: var(--glow-color);
+            font-size: 1em;
+            color: var(--logo-color);
         }
 
-        .section {
-            background: var(--section-bg);
-            margin-bottom: 20px;
-            padding: 40px 20px;
-            text-align: center;
-            animation: riseUpSection 1s ease-out;
-            z-index: 0; /* Below header */
+        .why-choose-us {
+            animation: fadeInUp 0.8s ease forwards;
+            transform: translateY(50px);
         }
 
-        @keyframes riseUpSection {
-            0% { transform: translateY(50px); opacity: 0; }
-            100% { transform: translateY(0); opacity: 1; }
-        }
-
-        h2 {
-            font-size: 2.5em;
-            margin-bottom: 20px;
-            color: var(--primary-color);
-            text-shadow: 0 0 5px rgba(40, 167, 69, 0.5);
-            animation: fadeInHeader 1s ease-in;
-        }
-
-        @keyframes fadeInHeader {
-            0% { opacity: 0; }
-            100% { opacity: 1; }
-        }
-
-        .cards-container {
+        .why-choose-us .reasons {
             display: flex;
             justify-content: center;
-            gap: 20px;
+            gap: 15px;
             flex-wrap: wrap;
-            animation: spreadOut 1.5s ease-out;
+            margin-top: 20px;
         }
 
-        @keyframes spreadOut {
-            0% { transform: scale(0.7); opacity: 0; }
-            100% { transform: scale(1); opacity: 1; }
-        }
-
-        .card {
+        .reason-card {
             background: rgba(255, 255, 255, 0.05);
             padding: 15px;
             border: 1px solid #2D2D2D;
             border-radius: 10px;
-            width: 300px;
-            margin: 10px auto;
+            width: 100%;
+            max-width: 250px;
+            text-align: center;
+        }
+
+        .how-we-work {
+            animation: slideInLeft 0.8s ease forwards;
+            transform: translateX(-100px);
+        }
+
+        .how-we-work .steps {
+            text-align: left;
+            max-width: 600px;
+            margin: 20px auto;
+        }
+
+        .step {
+            margin: 15px 0;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .step:before {
+            content: "•";
+            color: var(--primary-color);
+            position: absolute;
+            left: 0;
+        }
+
+        .services {
+            animation: zoomIn 0.8s ease forwards;
+            transform: scale(0.9);
+        }
+
+        .service-cards {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .service-card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 15px;
+            border: 1px solid #2D2D2D;
+            border-radius: 10px;
+            width: 100%;
+            max-width: 250px;
+            text-decoration: none;
+            color: var(--text-color);
             transition: transform 0.3s;
-            animation: flipInCard 1s ease-out;
         }
 
-        @keyframes flipInCard {
-            0% { transform: rotateY(90deg); opacity: 0; }
-            100% { transform: rotateY(0deg); opacity: 1; }
-        }
-
-        .card:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 15px var(--accent-color);
+        .service-card:hover {
+            transform: scale(1.03);
         }
 
         .animated-icon {
-            width: 50px;
-            height: 50px;
+            width: 40px;
+            height: 40px;
             margin-bottom: 10px;
-            animation: orbitSpin 2s infinite linear;
         }
 
-        @keyframes orbitSpin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+        .contact {
+            animation: fadeInUp 0.8s ease forwards;
+            transform: translateY(50px);
         }
 
-        .booking-form {
-            max-width: 400px;
+        .contact form {
+            display: flex;
+            flex-direction: column;
+            max-width: 350px;
             margin: 0 auto;
             background: rgba(255, 255, 255, 0.05);
-            padding: 20px;
+            padding: 15px;
             border-radius: 10px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-            animation: bounceUpForm 1s ease-out;
         }
 
-        @keyframes bounceUpForm {
-            0% { transform: translateY(50px); opacity: 0; }
-            50% { transform: translateY(-10px); }
-            100% { transform: translateY(0); opacity: 1; }
-        }
-
-        .booking-form input, .booking-form button {
-            width: 100%;
-            margin-bottom: 15px;
-            padding: 10px;
+        .contact input, .contact select, .contact textarea {
+            margin-bottom: 10px;
+            padding: 8px;
             border: 1px solid var(--primary-color);
             border-radius: 5px;
-            font-size: 1em;
+            font-size: 0.9em;
             background: rgba(255, 255, 255, 0.1);
             color: var(--text-color);
-            animation: slideRightInput 1s ease-in;
         }
 
-        @keyframes slideRightInput {
-            0% { transform: translateX(-100px); opacity: 0; }
-            100% { transform: translateX(0); opacity: 1; }
-        }
-
-        .booking-form button {
+        .contact button {
+            padding: 8px;
             background: var(--primary-color);
             color: #FFFFFF;
             border: none;
+            border-radius: 5px;
             cursor: pointer;
-            animation: throbButton 2s infinite;
+            font-weight: bold;
         }
 
-        @keyframes throbButton {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-            100% { transform: scale(1); }
-        }
-
-        .booking-form button:hover {
+        .contact button:hover {
             background: var(--accent-color);
         }
 
         .mobile-nav {
-            display: none;
             position: fixed;
             bottom: 0;
             width: 100%;
             background: var(--section-bg);
             padding: 10px;
             text-align: center;
-            z-index: 1000; /* Above content but below header */
-            animation: liftNav 1s ease-out;
-        }
-
-        @keyframes liftNav {
-            0% { transform: translateY(100%); opacity: 0; }
-            100% { transform: translateY(0); opacity: 1; }
+            z-index: 1000;
+            display: flex;
+            justify-content: space-around;
         }
 
         .mobile-nav a {
-            margin: 0 15px;
             color: var(--primary-color);
-            font-size: 1.5em;
-            animation: dropInNav 1s ease-in;
+            font-size: 1.3em;
+            text-decoration: none;
         }
 
-        @keyframes dropInNav {
-            0% { transform: translateY(-50px); opacity: 0; }
-            100% { transform: translateY(0); opacity: 1; }
+        .error-message {
+            display: none;
+            color: #FF5555;
+            text-align: center;
+            margin-top: 15px;
+            font-size: 1em;
         }
 
         @media (max-width: 768px) {
-            .menu-toggle {
-                display: block;
+            .hero, .why-choose-us, .how-we-work, .services, .contact {
+                padding: 80px 15px 20px;
             }
 
-            .nav-menu {
-                position: fixed;
-                top: 0;
-                right: -100%;
-                width: 100%;
-                height: 100%;
-                background: var(--section-bg);
-                transition: right 0.3s ease;
-                animation: slideInSide 0.5s ease-out forwards;
-                z-index: 1000; /* Ensure it overlays content */
+            .hero {
+                min-height: 250px;
             }
 
-            .nav-menu.active {
-                right: 0;
+            .hero h1 {
+                font-size: 1.8em;
             }
 
-            .nav-menu ul {
-                flex-direction: column;
-                padding: 20px;
-                margin-top: 60px;
+            .hero p {
+                font-size: 0.9em;
             }
 
-            .close-menu {
-                background: none;
-                border: none;
-                font-size: 1.5em;
-                position: absolute;
-                top: 10px;
-                right: 10px;
-                cursor: pointer;
-                color: #FFFFFF;
-                animation: spinOut 0.5s ease-out;
-                z-index: 1001; /* Above menu content */
-            }
-
-            @keyframes slideInSide {
-                0% { right: -100%; }
-                100% { right: 0; }
+            .reason-card, .service-card {
+                width: 90%;
+                margin: 10px auto;
             }
         }
     </style>
@@ -449,183 +332,124 @@
             <a href="#"><i class="fab fa-twitter"></i></a>
             <a href="#"><i class="fab fa-instagram"></i></a>
         </div>
-        <div class="menu-toggle">☰</div>
-        <div class="nav-menu">
-            <button class="close-menu">X</button>
-            <ul>
-                <li><a href="index.html" onclick="closeMenuOnClick()">Home</a></li>
-                <li><a href="#services" onclick="closeMenuOnClick()">Services</a></li>
-                <li><a href="index.html#portfolio" onclick="closeMenuOnClick()">Portfolio</a></li>
-                <li><a href="index.html#contact" onclick="closeMenuOnClick()">Contact</a></li>
-            </ul>
-        </div>
     </header>
 
-    <section class="hero" data-aos="fade-in">
+    <section id="home" class="hero">
         <h1>Web Development Services</h1>
         <p>Craft Stunning Websites for Your Business</p>
     </section>
 
-    <section class="section" data-aos="zoom-in">
-        <h2>Our Web Development Services</h2>
-        <div class="cards-container">
-            <div class="card">
-                <svg class="animated-icon" viewBox="0 0 100 100">
-                    <rect x="20" y="20" width="60" height="60" fill="none" stroke="#28A745">
-                        <animate attributeName="height" from="60" to="65" dur="1.5s" repeatCount="indefinite"/>
-                    </svg>
-                <h3>Custom Websites</h3>
-                <p>Tailored designs to match your brand identity.</p>
-            </div>
-            <div class="card">
-                <svg class="animated-icon" viewBox="0 0 100 100">
-                    <circle cx="50" cy="50" r="40" fill="none" stroke="#1DB954">
-                        <animateTransform attributeName="transform" type="rotate" from="0 50 50" to="360 50 50" dur="2s" repeatCount="indefinite"/>
-                    </svg>
-                <h3>E-Commerce Solutions</h3>
-                <p>Build online stores with secure payment systems.</p>
-            </div>
-            <div class="card">
-                <svg class="animated-icon" viewBox="0 0 100 100">
-                    <polygon points="50,10 90,90 10,90" fill="none" stroke="#1E90FF">
-                        <animateTransform attributeName="transform" type="scale" from="1" to="1.2" dur="2.5s" repeatCount="indefinite"/>
-                    </svg>
-                <h3>Responsive Design</h3>
-                <p>Ensure compatibility across all devices.</p>
-            </div>
-            <div class="card">
-                <svg class="animated-icon" viewBox="0 0 100 100">
-                    <path d="M10 50 Q50 10 90 50 T90 90 T50 130 T10 90 T10 50" fill="none" stroke="#28A745">
-                        <animate attributeName="stroke-dasharray" from="0 300" to="300 0" dur="2s" repeatCount="indefinite"/>
-                    </svg>
-                <h3>Website Maintenance</h3>
-                <p>Keep your site updated and secure.</p>
-            </div>
-        </div>
-    </section>
-
-    <section class="section" data-aos="slide-up">
-        <h2>Benefits of Our Services</h2>
-        <div class="cards-container">
-            <div class="card">
-                <i class="fas fa-desktop" style="font-size: 2em; color: #28A745; animation: bounce 1s infinite;"></i>
-                <h3>Improved User Experience</h3>
-                <p>Intuitive navigation for your visitors.</p>
-            </div>
-            <div class="card">
-                <i class="fas fa-chart-line" style="font-size: 2em; color: #1DB954; animation: fadeIn 1s ease-in-out infinite alternate;"></i>
-                <h3>Increased Traffic</h3>
-                <p>Boost visibility with SEO-friendly designs.</p>
-            </div>
-            <div class="card">
-                <i class="fas fa-shield-alt" style="font-size: 2em; color: #1E90FF; animation: rotate 2s linear infinite;"></i>
-                <h3>Enhanced Security</h3>
-                <p>Protect your site from cyber threats.</p>
-            </div>
-            <div class="card">
-                <i class="fas fa-sync-alt" style="font-size: 2em; color: #28A745; animation: pulse 1.5s infinite;"></i>
-                <h3>Scalability</h3>
-                <p>Grow your site as your business expands.</p>
-            </div>
-        </div>
-    </section>
-
-    <section class="section" data-aos="slide-right">
-        <h2>Our Development Process</h2>
-        <div class="cards-container">
-            <div class="card">
-                <i class="fas fa-lightbulb" style="font-size: 2em; color: #28A745; animation: zoomIn 1s ease-in-out infinite;"></i>
-                <h3>Planning</h3>
-                <p>Define goals and design concepts.</p>
-            </div>
-            <div class="card">
-                <i class="fas fa-code" style="font-size: 2em; color: #1DB954; animation: slideIn 1s ease-out infinite alternate;"></i>
-                <h3>Development</h3>
-                <p>Build the site with modern technologies.</p>
-            </div>
-            <div class="card">
-                <i class="fas fa-check-circle" style="font-size: 2em; color: #1E90FF; animation: orbitSpin 2s infinite;"></i>
-                <h3>Testing</h3>
-                <p>Ensure functionality across browsers.</p>
-            </div>
-            <div class="card">
-                <i class="fas fa-upload" style="font-size: 2em; color: #28A745; animation: bounce 1.2s infinite;"></i>
-                <h3>Launch</h3>
-                <p>Deploy your site with confidence.</p>
-            </div>
-        </div>
-    </section>
-
-    <section class="section" data-aos="slide-left">
+    <section id="why-choose-us" class="why-choose-us">
         <h2>Why Choose Us</h2>
-        <div class="cards-container">
-            <div class="card">
-                <i class="fas fa-users-cog" style="font-size: 2em; color: #1E90FF; animation: fadeIn 1s ease-in-out infinite alternate;"></i>
+        <p>Discover why ChampTech Creations excels in web development.</p>
+        <div class="reasons">
+            <div class="reason-card">
                 <h3>Expert Developers</h3>
-                <p>Skilled team with diverse expertise.</p>
+                <p>Skilled team with extensive coding experience.</p>
             </div>
-            <div class="card">
-                <i class="fas fa-clock" style="font-size: 2em; color: #1DB954; animation: rotate 2s linear infinite;"></i>
-                <h3>Timely Delivery</h3>
-                <p>Projects completed on schedule.</p>
+            <div class="reason-card">
+                <h3>Custom Designs</h3>
+                <p>Unique websites tailored to your vision.</p>
             </div>
-            <div class="card">
-                <i class="fas fa-star-half-alt" style="font-size: 2em; color: #28A745; animation: pulse 1.5s infinite;"></i>
-                <h3>Custom Solutions</h3>
-                <p>Tailored websites for your unique needs.</p>
+            <div class="reason-card">
+                <h3>Responsive Sites</h3>
+                <p>Optimized for all devices and screen sizes.</p>
+            </div>
+            <div class="reason-card">
+                <h3>Ongoing Support</h3>
+                <p>Continuous updates and technical assistance.</p>
             </div>
         </div>
     </section>
 
-    <section class="section booking-section" data-aos="fade-in">
-        <h2>Book a Web Development Consultation</h2>
-        <div class="booking-form">
-            <input type="text" placeholder="Your Name" required>
-            <input type="email" placeholder="Your Email" required>
-            <input type="tel" placeholder="Your Phone" required>
-            <button onclick="window.location.href='https://wa.me/265881103561?text=Hello%20I%20want%20to%20book%20a%20web%20development%20consultation'">Book Now</button>
+    <section id="how-we-work" class="how-we-work">
+        <h2>How We Work</h2>
+        <p>Our proven process delivers high-quality web solutions.</p>
+        <div class="steps">
+            <div class="step">1. Consultation: We discuss your requirements and goals.</div>
+            <div class="step">2. Planning: We create a detailed project roadmap.</div>
+            <div class="step">3. Development: We build and code your website.</div>
+            <div class="step">4. Testing: We ensure functionality across platforms.</div>
+            <div class="step">5. Launch & Support: We deploy and provide ongoing maintenance.</div>
         </div>
+    </section>
+
+    <section id="services" class="services">
+        <h2>Our Web Development Services</h2>
+        <div class="service-cards">
+            <div class="service-card">
+                <svg class="animated-icon" viewBox="0 0 100 100">
+                    <circle cx="50" cy="50" r="40" fill="none" stroke="#28A745" stroke-width="5"/>
+                </svg>
+                <h3>Custom Websites</h3>
+                <p>Bespoke designs tailored to your brand identity.</p>
+            </div>
+            <div class="service-card">
+                <svg class="animated-icon" viewBox="0 0 100 100">
+                    <circle cx="50" cy="50" r="40" fill="none" stroke="#28A745" stroke-width="5"/>
+                </svg>
+                <h3>E-Commerce Solutions</h3>
+                <p>Robust online stores with secure transactions.</p>
+            </div>
+            <div class="service-card">
+                <svg class="animated-icon" viewBox="0 0 100 100">
+                    <rect x="30" y="30" width="40" height="40" fill="none" stroke="#1DB954" stroke-width="5"/>
+                </svg>
+                <h3>Maintenance</h3>
+                <p>Regular updates and security enhancements.</p>
+            </div>
+            <div class="service-card">
+                <svg class="animated-icon" viewBox="0 0 100 100">
+                    <polygon points="50,10 90,90 10,90" fill="none" stroke="#28A745" stroke-width="5"/>
+                </svg>
+                <h3>Web Applications</h3>
+                <p>Dynamic apps for enhanced user engagement.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="contact">
+        <h2>Contact Us</h2>
+        <form action="https://zapier.com/webhook/your-webhook-url" method="POST">
+            <input type="text" name="name" placeholder="Your Name" required>
+            <input type="email" name="email" placeholder="Your Email" required>
+            <input type="tel" name="phone" placeholder="Your Phone" required>
+            <select name="service" required>
+                <option value="">Select Service</option>
+                <option value="digitalmarketing">Digital Marketing</option>
+                <option value="webdevelopment">Web Development</option>
+                <option value="camerainstallation">Camera Installation</option>
+            </select>
+            <textarea name="message" placeholder="Your Message" required></textarea>
+            <button type="submit">Send to WhatsApp</button>
+        </form>
+        <p>Email: mayendajabulani@gmail.com | WhatsApp: 0881103561 | Address: Blantyre Mpemba</p>
+        <a href="https://wa.me/265881103561?text=Hello%20I%20want%20to%20book%20a%20web%20development%20consultation" class="whatsapp-btn">WhatsApp Us</a>
     </section>
 
     <div class="mobile-nav">
-        <a href="index.html" onclick="closeMenuOnClick()"><i class="fas fa-home"></i></a>
-        <a href="#services" onclick="closeMenuOnClick()"><i class="fas fa-cogs"></i></a>
-        <a href="index.html#portfolio" onclick="closeMenuOnClick()"><i class="fas fa-briefcase"></i></a>
-        <a href="index.html#contact" onclick="closeMenuOnClick()"><i class="fas fa-envelope"></i></a>
+        <a href="index.html"><i class="fas fa-home"></i></a>
+        <a href="digitalmarketing.html"><i class="fas fa-cogs"></i></a>
+        <a href="webdevelopment.html"><i class="fas fa-briefcase"></i></a>
+        <a href="camerainstallation.html"><i class="fas fa-envelope"></i></a>
     </div>
 
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            AOS.init({
-                duration: 1000,
-                easing: 'ease-in-out',
-            });
-
-            const menuToggle = document.querySelector('.menu-toggle');
-            const navMenu = document.querySelector('.nav-menu');
-            const closeMenu = document.querySelector('.close-menu');
-
-            menuToggle.addEventListener('click', () => {
-                navMenu.classList.add('active');
-            });
-
-            closeMenu.addEventListener('click', () => {
-                navMenu.classList.remove('active');
-            });
-
-            // Close menu when a link is clicked
-            function closeMenuOnClick() {
-                if (window.innerWidth <= 768) {
-                    navMenu.classList.remove('active');
-                }
+            const sections = document.querySelectorAll('.hero, .why-choose-us, .how-we-work, .services, .contact');
+            function checkScroll() {
+                sections.forEach(section => {
+                    const sectionPosition = section.getBoundingClientRect().top;
+                    const screenPosition = window.innerHeight / 1.3;
+                    if (sectionPosition < screenPosition) {
+                        section.style.animationPlayState = 'running';
+                    }
+                });
             }
-
-            // Ensure page loads correctly
-            window.addEventListener('load', () => {
-                navMenu.classList.remove('active'); // Reset menu state on page load
-            });
+            window.addEventListener('scroll', checkScroll);
+            // Trigger hero animation on load
+            document.querySelector('.hero').style.animationPlayState = 'running';
+            checkScroll(); // Trigger other animations on load if in view
         });
     </script>
 </body>
