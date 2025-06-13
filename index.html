@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ChampTech Creations</title>
+    <link href="https://fonts.googleapis.com/css2?family=Georgia&family=Arial&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+    <style>
+        :root {
+            --primary-color: #28A745; /* Green */
+            --logo-color: #1E3A8A; /* Dark blue */
+            --glow-color: #1E90FF; /* Glowing blue */
+            --accent-color: #1DB954; /* Spotify green */
+            --text-color: #FFFFFF;
+            --section-bg: #121212; /* Spotify dark grey */
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(45deg, #121212, rgba(29, 185, 84, 0.1), #000000);
+            background-size: 200% 200%;
+            animation: gradientFlow 15s ease infinite;
+            color: var(--text-color);
+            line-height: 1.6;
+            width: 100%;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+
+        @keyframes gradientFlow {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        header {
+            background: linear-gradient(to right, #121212, #1E3A8A);
+            padding: 20px 40px;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header-content {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo-img {
+            height: 50px;
+            width: auto;
+            margin-right: 15px;
+            filter: hue-rotate(200deg);
+        }
+
+        .company-name {
+            color: var(--logo-color);
+            font-family: 'Georgia', serif;
+            font-size: 1.5em;
+            font-weight: bold;
+            text-shadow: 0 0 10px var(--glow-color), 0 0 20px var(--glow-color), 0 0 30px var(--glow-color);
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        .social-icons a {
+            color: #FFFFFF;
+            margin-left: 10px;
+            transition: color 0.3s;
+        }
+
+        .social-icons a:hover {
+            color: var(--accent-color);
+        }
+
+        .menu-toggle {
+            display: none;
+            font-size: 1.5em;
+            cursor: pointer;
+            color: #FFFFFF;
+        }
+
+        .nav-menu ul {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-menu ul li {
+            margin-left: 20px;
+        }
+
+        .nav-menu ul li a {
+            color: #FFFFFF;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .nav-menu ul li a:hover {
+            color: var(--accent-color);
+        }
+
+        .hero {
+            padding: 100px 0 30px;
+            text-align: center;
+            background: transparent;
+            margin-bottom: 20px;
+            position: relative;
+            overflow: hidden;
+            min-height: 400px;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(30, 144, 255, 0.1) 0%, transparent 70%) repeat;
+            animation: particleWave 6s infinite linear;
+            z-index: -1;
+        }
+
+        @keyframes particleWave {
+            0% { background-position: 0 0, 0 0; }
+            100% { background-position: 100% 100%, 0 0; }
+        }
+
+        .hero h1 {
+            font-size: 2.5em; /* Further reduced size */
+            margin-bottom: 10px;
+            color: var(--glow-color); /* Blue color */
+            text-transform: uppercase;
+            animation: none; /* Removed animation */
+        }
+
+        .hero p {
+            font-size: 1.2em; /* Further reduced size */
+            color: var(--glow-color); /* Blue color */
+            animation: none; /* Removed animation */
+        }
+
+        .services, .portfolio, .contact, .why-choose-us, .about-us, .testimonials, .blog-preview {
+            background: var(--section-bg);
+            margin-bottom: 20px;
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        h2 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            color: var(--primary-color);
+            text-shadow: 0 0 5px rgba(40, 167, 69, 0.5);
+        }
+
+        .service-cards, .reasons, .team-members, .blog-posts {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .service-card, .reason-box, .team-member, .blog-post {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 15px;
+            border: 1px solid #2D2D2D;
+            border-radius: 10px;
+            width: 250px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .service-card:hover, .reason-box:hover, .team-member:hover, .blog-post:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 15px var(--accent-color);
+        }
+
+        .animated-icon {
+            width: 50px;
+            height: 50px;
+            margin-bottom: 10px;
+        }
+
+        .swiper-container {
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+            height: 400px;
+            overflow: hidden;
+        }
+
+        .swiper-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+        .team-member img {
+            max-width: 100px;
+            max-height: 100px;
+            border-radius: 50%;
+            margin-bottom: 10px;
+        }
+
+        .testimonial-bubble {
+            background: rgba(45, 45, 45, 0.8);
+            padding: 15px;
+            border-radius: 10px;
+            margin: 10px 0;
+            position: relative;
+            text-align: left;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+        }
+
+        .testimonial-bubble::before {
+            content: "";
+            position: absolute;
+            top: -10px;
+            left: 20px;
+            border-width: 0 10px 10px 10px;
+            border-style: solid;
+            border-color: transparent transparent rgba(45, 45, 45, 0.8) transparent;
+        }
+
+        .contact form {
+            display: flex;
+            flex-direction: column;
+            max-width: 400px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+        }
+
+        .contact input, .contact select, .contact textarea {
+            margin-bottom: 15px;
+            padding: 10px;
+            border: 1px solid var(--primary-color);
+            border-radius: 5px;
+            font-size: 1em;
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--text-color);
+        }
+
+        .contact button {
+            padding: 10px;
+            background: var(--primary-color);
+            color: #FFFFFF;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .contact button:hover {
+            background: var(--accent-color);
+        }
+
+        .mobile-nav {
+            display: none;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background: var(--section-bg);
+            padding: 10px;
+            text-align: center;
+        }
+
+        .mobile-nav a {
+            margin: 0 15px;
+            color: var(--primary-color);
+            font-size: 1.5em;
+        }
+
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+
+            .nav-menu {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 100%;
+                height: 100%;
+                background: var(--section-bg);
+                transition: right 0.3s ease;
+            }
+
+            .nav-menu.active {
+                right: 0;
+            }
+
+            .nav-menu ul {
+                flex-direction: column;
+                padding: 20px;
+                margin-top: 60px;
+            }
+
+            .close-menu {
+                background: none;
+                border: none;
+                font-size: 1.5em;
+                position: absolute;
+                top: 10px;
+                right: 10px;
+                cursor: pointer;
+                color: #FFFFFF;
+            }
+
+            .mobile-nav {
+                display: flex;
+                justify-content: space-around;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <div class="logo">
+                <img src="images/WhatsApp Image 2025-06-13 at 13.04.15_89c06f46.jpg" alt="ChampTech Creations Logo" class="logo-img">
+            </div>
+            <h1 class="company-name">ChampTech Creations</h1>
+        </div>
+        <div class="social-icons">
+            <a href="#"><i class="fab fa-linkedin"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+        </div>
+        <div class="menu-toggle">☰</div>
+        <div class="nav-menu">
+            <button class="close-menu">X</button>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#portfolio">Portfolio</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <section id="home" class="hero" data-aos="fade-in">
+        <h1>Welcome to ChampTech Creations</h1>
+        <p>Innovative Tech Solutions for the Future</p>
+    </section>
+
+    <section id="services" class="services" data-aos="slide-up">
+        <h2>Our Services</h2>
+        <div class="service-cards">
+            <a href="digitalmarketin.html" class="service-card" data-aos="fade-in" data-aos-delay="200">
+                <svg class="animated-icon" viewBox="0 0 100 100">
+                    <circle cx="50" cy="50" r="40" fill="none" stroke="#28A745" stroke-width="5">
+                        <animate attributeName="r" from="40" to="45" dur="1s" repeatCount="indefinite"/>
+                    </circle>
+                </svg>
+                <h3>Digital Marketing</h3>
+                <p>Boost your online presence with targeted campaigns.</p>
+            </a>
+            <a href="webdevelopment.html" class="service-card" data-aos="fade-in" data-aos-delay="200">
+                <svg class="animated-icon" viewBox="0 0 100 100">
+                    <circle cx="50" cy="50" r="40" fill="none" stroke="#28A745" stroke-width="5">
+                        <animate attributeName="r" from="40" to="45" dur="1s" repeatCount="indefinite"/>
+                    </circle>
+                </svg>
+                <h3>webdevelopment</h3>
+                <p>Boost your online presence with targeted campaigns.</p>
+            </a>
+            <a href="camera-installation.html" class="service-card" data-aos="fade-in" data-aos-delay="400">
+                <svg class="animated-icon" viewBox="0 0 100 100">
+                    <rect x="30" y="30" width="40" height="40" fill="none" stroke="#1DB954" stroke-width="5">
+                        <animateTransform attributeName="transform" type="rotate" from="0 50 50" to="360 50 50" dur="2s" repeatCount="indefinite"/>
+                    </rect>
+                </svg>
+                <h3>Camera Installation</h3>
+                <p>Secure your space with expert surveillance solutions.</p>
+            </a>
+        </div>
+    </section>
+
+    <section id="portfolio" class="portfolio" data-aos="zoom-in">
+        <h2>Our Portfolio</h2>
+        <div class="swiper-container">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide"><img src="images/blue.jpg" alt="Project 1"></div>
+                <div class="swiper-slide"><img src="images/flyer.jpg" alt="Project 2"></div>
+                <div class="swiper-slide"><img src="images/good.jpg" alt="Project 3"></div>
+            </div>
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
+        </div>
+    </section>
+
+    <section id="why-choose-us" class="why-choose-us" data-aos="slide-up">
+        <h2>Why Choose Us</h2>
+        <div class="reasons">
+            <div class="reason-box" data-aos="fade-in" data-aos-delay="200">
+                <i class="fas fa-users"></i>
+                <h3>Expert Team</h3>
+                <p>Our professionals deliver top-notch services with expertise.</p>
+            </div>
+            <div class="reason-box" data-aos="fade-in" data-aos-delay="400">
+                <i class="fas fa-headset"></i>
+                <h3>24/7 Support</h3>
+                <p>We're here anytime to ensure your satisfaction.</p>
+            </div>
+            <div class="reason-box" data-aos="fade-in" data-aos-delay="600">
+                <i class="fas fa-lightbulb"></i>
+                <h3>Innovative Technology</h3>
+                <p>We use cutting-edge tools to enhance your experience.</p>
+            </div>
+            <div class="reason-box" data-aos="fade-in" data-aos-delay="800">
+                <i class="fas fa-thumbs-up"></i>
+                <h3>Customer Satisfaction</h3>
+                <p>Your happiness drives everything we do.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="about-us" class="about-us" data-aos="slide-up">
+        <h2>About Us</h2>
+        <h3>How We Started</h3>
+        <p>ChampTech Creations began in Blantyre Mpemba with a passion for technology and design, aiming to empower businesses with innovative solutions.</p>
+        <h3>Our Team</h3>
+        <div class="team-members">
+            <div class="team-member" data-aos="zoom-in" data-aos-delay="200">
+                <img src="images/me1.jpg" alt="Developer">
+                <h4>jabulani mayenda - Developer</h4>
+                <p>Expert in building robust software solutions.</p>
+            </div>
+            <div class="team-member" data-aos="zoom-in" data-aos-delay="400">
+                <img src="images/me 2.jpg" alt="Digital Marketer">
+                <h4>Benson - Digital Marketer</h4>
+                <p>Specializes in boosting online visibility.</p>
+            </div>
+            <div class="team-member" data-aos="zoom-in" data-aos-delay="600">
+                <img src="images/treasure.jpg" alt="Multimedia Specialist">
+                <h4>treasure mayenda- Multimedia Specialist</h4>
+                <p>Creates stunning video and graphic content.</p>
+            </div>
+            <div class="team-member" data-aos="zoom-in" data-aos-delay="800">
+                <img src="https://via.placeholder.com/150x150?text=Network+Specialist" alt="Network Specialist">
+                <h4>Bob Lee - Network Specialist</h4>
+                <p>Ensures seamless network connectivity.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="testimonials" class="testimonials" data-aos="slide-up">
+        <h2>What Our Clients Say</h2>
+        <div class="testimonial-bubble">
+            <p>"ChampTech Creations transformed our online presence. Highly recommend!"</p>
+            <h4>- Satisfied Client</h4>
+        </div>
+        <div class="testimonial-bubble">
+            <p>"Their services are top-notch and the team is incredibly responsive."</p>
+            <h4>- Happy Customer</h4>
+        </div>
+    </section>
+
+    <section id="blog-preview" class="blog-preview" data-aos="slide-up">
+        <h2>Latest Blog Posts</h2>
+        <div class="blog-posts">
+            <div class="blog-post">
+                <h3>Digital Marketing Trends 2025</h3>
+                <p>Stay ahead with the latest trends in digital marketing.</p>
+                <a href="#">Read More</a>
+            </div>
+            <div class="blog-post">
+                <h3>Security Tips for Businesses</h3>
+                <p>Learn how to protect your business with our expert tips.</p>
+                <a href="#">Read More</a>
+            </div>
+            <div class="blog-post">
+                <h3>Web Development Best Practices</h3>
+                <p>Discover the best practices for creating stunning websites.</p>
+                <a href="#">Read More</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="contact" data-aos="slide-up">
+        <h2>Contact Us</h2>
+        <form action="https://zapier.com/webhook/your-webhook-url" method="POST">
+            <input type="text" name="name" placeholder="Your Name" required>
+            <input type="email" name="email" placeholder="Your Email" required>
+            <input type="tel" name="phone" placeholder="Your Phone" required>
+            <select name="service" required>
+                <option value="">Select Service</option>
+                <option value="digital-marketing">Digital Marketing</option>
+                <option value="camera-installation">Camera Installation</option>
+            </select>
+            <textarea name="message" placeholder="Your Message" required></textarea>
+            <button type="submit">Send to WhatsApp</button>
+        </form>
+        <p>Email: mayendajabulani@gmail.com | WhatsApp: 0881103561 | Address: Blantyre Mpemba</p>
+        <a href="https://wa.me/265881103561?text=Hello%20I%20want%20to%20book%20a%20consultation" class="whatsapp-btn">WhatsApp Us</a>
+    </section>
+
+    <div class="mobile-nav">
+        <a href="#home"><i class="fas fa-home"></i></a>
+        <a href="#services"><i class="fas fa-cogs"></i></a>
+        <a href="#portfolio"><i class="fas fa-briefcase"></i></a>
+        <a href="#contact"><i class="fas fa-envelope"></i></a>
+    </div>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            AOS.init({
+                duration: 1000,
+                easing: 'ease-in-out',
+            });
+
+            const menuToggle = document.querySelector('.menu-toggle');
+            const navMenu = document.querySelector('.nav-menu');
+            const closeMenu = document.querySelector('.close-menu');
+
+            menuToggle.addEventListener('click', () => {
+                navMenu.classList.add('active');
+            });
+
+            closeMenu.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+            });
+
+            var swiper = new Swiper('.swiper-container', {
+                loop: true,
+                slidesPerView: 1,
+                autoplay: {
+                    delay: 3000,
+                    disableOnInteraction: false,
+                },
+                navigation: {
+                    nextEl: '.swiper-button-next',
+                    prevEl: '.swiper-button-prev',
+                },
+            });
+        });
+    </script>
+</body>
+</html>
