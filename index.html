@@ -49,7 +49,7 @@
             position: fixed;
             width: 100%;
             top: 0;
-            z-index: 1000;
+            z-index: 1001; /* Above all content */
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -91,6 +91,7 @@
             font-size: 1.5em;
             cursor: pointer;
             color: #FFFFFF;
+            z-index: 1002; /* Above mobile menu */
         }
 
         .nav-menu {
@@ -115,6 +116,60 @@
 
         .nav-menu ul li a:hover {
             color: var(--accent-color);
+        }
+
+        .nav-menu-mobile {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 80%;
+            height: 100%;
+            background: var(--section-bg);
+            transition: right 0.3s ease;
+            z-index: 1000; /* Above content but below header */
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+        }
+
+        .nav-menu-mobile.active {
+            right: 0;
+        }
+
+        .nav-menu-mobile ul {
+            list-style: none;
+            margin-top: 60px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .nav-menu-mobile ul li {
+            margin: 10px 0;
+        }
+
+        .nav-menu-mobile ul li a {
+            color: #FFFFFF;
+            text-decoration: none;
+            font-size: 1.2em;
+            transition: color 0.3s;
+        }
+
+        .nav-menu-mobile ul li a:hover {
+            color: var(--accent-color);
+        }
+
+        .close-menu {
+            background: none;
+            border: none;
+            font-size: 1.5em;
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            cursor: pointer;
+            color: #FFFFFF;
+            z-index: 1001; /* Above mobile menu */
         }
 
         .hero {
@@ -301,7 +356,7 @@
                 height: 100%;
                 background: var(--section-bg);
                 transition: right 0.3s ease;
-                z-index: 999;
+                z-index: 999; /* Adjusted to ensure it’s above content but manageable */
             }
 
             .nav-menu.active {
@@ -331,6 +386,7 @@
                 right: 15px;
                 cursor: pointer;
                 color: #FFFFFF;
+                z-index: 1001; /* Above mobile menu */
             }
 
             .mobile-nav {
@@ -472,7 +528,7 @@
 
             menuToggle.addEventListener('click', (e) => {
                 e.preventDefault();
-                navMenu.classList.add('active');
+                navMenu.classList.toggle('active');
             });
 
             closeMenu.addEventListener('click', (e) => {
@@ -482,6 +538,13 @@
 
             // Close menu when clicking a link
             navMenu.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    navMenu.classList.remove('active');
+                });
+            });
+
+            // Close menu when clicking mobile nav links
+            document.querySelectorAll('.mobile-nav a').forEach(link => {
                 link.addEventListener('click', () => {
                     navMenu.classList.remove('active');
                 });
