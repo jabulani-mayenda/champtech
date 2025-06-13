@@ -22,7 +22,7 @@
             padding: 0;
             box-sizing: border-box;
             font-family: 'Arial', sans-serif;
-            -webkit-tap-highlight-color: transparent; /* Prevent mobile tap highlight */
+            -webkit-tap-highlight-color: transparent;
         }
 
         body {
@@ -49,7 +49,7 @@
             position: fixed;
             width: 100%;
             top: 0;
-            z-index: 1001; /* Above all content */
+            z-index: 1001;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -86,98 +86,50 @@
             color: var(--accent-color);
         }
 
-        .menu-toggle {
-            display: none;
-            font-size: 1.5em;
-            cursor: pointer;
-            color: #FFFFFF;
-            z-index: 1002; /* Above mobile menu */
-        }
-
-        .nav-menu {
-            display: block;
-        }
-
-        .nav-menu ul {
-            display: flex;
-            list-style: none;
-        }
-
-        .nav-menu ul li {
-            margin-left: 15px;
-        }
-
-        .nav-menu ul li a {
-            color: #FFFFFF;
-            text-decoration: none;
-            font-size: 1em;
-            transition: color 0.3s;
-        }
-
-        .nav-menu ul li a:hover {
-            color: var(--accent-color);
-        }
-
-        .nav-menu-mobile {
-            position: fixed;
-            top: 0;
-            right: -100%;
-            width: 80%;
-            height: 100%;
+        .hero, .services, .portfolio, .about-us, .testimonials, .contact {
             background: var(--section-bg);
-            transition: right 0.3s ease;
-            z-index: 1000; /* Above content but below header */
-            padding: 15px;
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-start;
+            margin-bottom: 20px;
+            padding: 30px 15px;
+            text-align: center;
+            opacity: 0;
         }
 
-        .nav-menu-mobile.active {
-            right: 0;
+        h2 {
+            font-size: 2em;
+            margin-bottom: 15px;
+            color: var(--primary-color);
         }
 
-        .nav-menu-mobile ul {
-            list-style: none;
-            margin-top: 60px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+        /* Animations for Each Section */
+        @keyframes bounceIn {
+            0% { opacity: 0; transform: scale(0.5); }
+            50% { transform: scale(1.05); }
+            100% { opacity: 1; transform: scale(1); }
         }
 
-        .nav-menu-mobile ul li {
-            margin: 10px 0;
+        @keyframes flyInFrontDown {
+            0% { opacity: 0; transform: translateY(-100px) scale(0.8); }
+            50% { transform: translateY(20px) scale(1.1); }
+            100% { opacity: 1; transform: translateY(0) scale(1); }
         }
 
-        .nav-menu-mobile ul li a {
-            color: #FFFFFF;
-            text-decoration: none;
-            font-size: 1.2em;
-            transition: color 0.3s;
+        @keyframes slideInLeft {
+            to { opacity: 1; transform: translateX(0); }
         }
 
-        .nav-menu-mobile ul li a:hover {
-            color: var(--accent-color);
+        @keyframes zoomIn {
+            to { opacity: 1; transform: scale(1); }
         }
 
-        .close-menu {
-            background: none;
-            border: none;
-            font-size: 1.5em;
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            cursor: pointer;
-            color: #FFFFFF;
-            z-index: 1001; /* Above mobile menu */
+        @keyframes fadeIn {
+            to { opacity: 1; }
         }
 
         .hero {
-            padding: 100px 20px 30px; /* Increased top padding for desktop */
-            text-align: center;
-            background: var(--section-bg);
-            margin-bottom: 20px;
+            padding-top: 100px;
             min-height: 300px;
+            animation: bounceIn 1s ease forwards;
+            transform: scale(0.5);
         }
 
         .hero h1 {
@@ -192,20 +144,12 @@
             color: var(--logo-color);
         }
 
-        .services, .portfolio, .contact, .why-choose-us, .about-us, .testimonials, .blog-preview {
-            background: var(--section-bg);
-            margin-bottom: 20px;
-            padding: 30px 15px;
-            text-align: center;
+        .services {
+            animation: flyInFrontDown 0.8s ease forwards;
+            transform: translateY(-100px) scale(0.8);
         }
 
-        h2 {
-            font-size: 2em;
-            margin-bottom: 15px;
-            color: var(--primary-color);
-        }
-
-        .service-cards, .reasons, .team-members, .blog-posts {
+        .service-cards {
             display: flex;
             justify-content: center;
             gap: 15px;
@@ -221,17 +165,30 @@
             max-width: 250px;
             text-decoration: none;
             color: var(--text-color);
-            transition: transform 0.3s;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 0 10px rgba(40, 167, 69, 0.5);
+            animation: glow 1.5s infinite alternate;
         }
 
         .service-card:hover {
             transform: scale(1.03);
+            box-shadow: 0 0 15px rgba(40, 167, 69, 0.8);
+        }
+
+        @keyframes glow {
+            from { box-shadow: 0 0 5px rgba(40, 167, 69, 0.3); }
+            to { box-shadow: 0 0 15px rgba(40, 167, 69, 0.7); }
         }
 
         .animated-icon {
             width: 40px;
             height: 40px;
             margin-bottom: 10px;
+        }
+
+        .portfolio {
+            animation: zoomIn 0.8s ease forwards;
+            transform: scale(0.9);
         }
 
         .swiper-container {
@@ -249,6 +206,28 @@
             border-radius: 10px;
         }
 
+        .about-us {
+            animation: slideInLeft 0.8s ease forwards;
+            transform: translateX(-100px);
+        }
+
+        .about-us .team-members {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .team-member {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 15px;
+            border: 1px solid #2D2D2D;
+            border-radius: 10px;
+            width: 100%;
+            max-width: 200px;
+            text-align: center;
+        }
+
         .team-member img {
             max-width: 80px;
             max-height: 80px;
@@ -256,7 +235,11 @@
             margin-bottom: 10px;
         }
 
-        .testimonial-bubble {
+        .testimonials {
+            animation: fadeIn 0.8s ease forwards;
+        }
+
+        .testimonials .testimonial-bubble {
             background: rgba(45, 45, 45, 0.8);
             padding: 15px;
             border-radius: 10px;
@@ -265,6 +248,11 @@
             max-width: 500px;
             margin-left: auto;
             margin-right: auto;
+        }
+
+        .contact {
+            animation: slideInLeft 0.8s ease forwards;
+            transform: translateX(-100px);
         }
 
         .contact form {
@@ -302,7 +290,6 @@
         }
 
         .mobile-nav {
-            display: none;
             position: fixed;
             bottom: 0;
             width: 100%;
@@ -310,12 +297,14 @@
             padding: 10px;
             text-align: center;
             z-index: 1000;
+            display: flex;
+            justify-content: space-around;
         }
 
         .mobile-nav a {
-            margin: 0 12px;
             color: var(--primary-color);
             font-size: 1.3em;
+            text-decoration: none;
         }
 
         .error-message {
@@ -327,75 +316,11 @@
         }
 
         @media (max-width: 768px) {
-            header {
-                padding: 15px;
-            }
-
-            .logo-img {
-                height: 35px;
-            }
-
-            .company-name {
-                font-size: 1.2em;
-            }
-
-            .social-icons a {
-                margin-left: 5px;
-                font-size: 1em;
-            }
-
-            .menu-toggle {
-                display: block;
-            }
-
-            .nav-menu {
-                position: fixed;
-                top: 0;
-                right: -100%;
-                width: 80%;
-                height: 100%;
-                background: var(--section-bg);
-                transition: right 0.3s ease;
-                z-index: 999; /* Adjusted to ensure it’s above content but manageable */
-            }
-
-            .nav-menu.active {
-                right: 0;
-            }
-
-            .nav-menu ul {
-                flex-direction: column;
-                padding: 15px;
-                margin-top: 60px;
-            }
-
-            .nav-menu ul li {
-                margin: 10px 0;
-            }
-
-            .nav-menu ul li a {
-                font-size: 1.2em;
-            }
-
-            .close-menu {
-                background: none;
-                border: none;
-                font-size: 1.5em;
-                position: absolute;
-                top: 15px;
-                right: 15px;
-                cursor: pointer;
-                color: #FFFFFF;
-                z-index: 1001; /* Above mobile menu */
-            }
-
-            .mobile-nav {
-                display: flex;
-                justify-content: space-around;
+            .hero, .services, .portfolio, .about-us, .testimonials, .contact {
+                padding: 80px 15px 20px;
             }
 
             .hero {
-                padding: 80px 15px 20px; /* Increased top padding to avoid header overlap */
                 min-height: 250px;
             }
 
@@ -407,10 +332,6 @@
                 font-size: 0.9em;
             }
 
-            .services, .portfolio, .contact, .why-choose-us, .about-us, .testimonials, .blog-preview {
-                padding: 20px 10px;
-            }
-
             .service-card {
                 width: 90%;
                 margin: 10px auto;
@@ -419,6 +340,11 @@
             .swiper-container {
                 height: 250px;
             }
+
+            .team-member {
+                width: 90%;
+                margin: 10px auto;
+            }
         }
     </style>
 </head>
@@ -426,7 +352,7 @@
     <header>
         <div class="header-content">
             <div class="logo">
-                <img src="images/logo.jpg" alt="ChampTech Creations Logo" class="logo-img">
+                <img src="images/WhatsApp Image 2025-06-13 at 13.04.15_89c06f46.jpg" alt="ChampTech Creations Logo" class="logo-img">
             </div>
             <h1 class="company-name">ChampTech Creations</h1>
         </div>
@@ -434,16 +360,6 @@
             <a href="#"><i class="fab fa-linkedin"></i></a>
             <a href="#"><i class="fab fa-twitter"></i></a>
             <a href="#"><i class="fab fa-instagram"></i></a>
-        </div>
-        <div class="menu-toggle">☰</div>
-        <div class="nav-menu">
-            <button class="close-menu">X</button>
-            <ul>
-                <li><a href="#home">Home</a></li>
-                <li><a href="#services">Services</a></li>
-                <li><a href="#portfolio">Portfolio</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
         </div>
     </header>
 
@@ -477,7 +393,6 @@
                 <p>Secure your space with expert surveillance solutions.</p>
             </a>
         </div>
-        <div class="error-message" id="error-message">Sorry, that page is not available. Please contact us for more info.</div>
     </section>
 
     <section id="portfolio" class="portfolio">
@@ -490,6 +405,40 @@
             </div>
             <div class="swiper-button-next"></div>
             <div class="swiper-button-prev"></div>
+        </div>
+    </section>
+
+    <section id="about-us" class="about-us">
+        <h2>About Us</h2>
+        <p>Meet the dedicated team behind ChampTech Creations.</p>
+        <div class="team-members">
+            <div class="team-member">
+                <img src="images/me1.jpg" alt="Team Member 1">
+                <h3>JABUALNI B. MAYENDA</h3>
+                <p>CEO & Founder</p>
+            </div>
+            <div class="team-member">
+                <img src="images/me 2.jpg" alt="Team Member 2">
+                <h3>BENSON MAYENDA</h3>
+                <p>Lead Developer</p>
+            </div>
+            <div class="team-member">
+                <img src="images/treasure.jpg" alt="Team Member 3">
+                <h3>TREASURE</h3>
+                <p>Marketing Expert</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="testimonials" class="testimonials">
+        <h2>What People Say About Us</h2>
+        <div class="testimonial-bubble">
+            <p>"Amazing service! Transformed our online presence in no time."</p>
+            <p><strong>- Sarah K.</strong></p>
+        </div>
+        <div class="testimonial-bubble">
+            <p>"Professional team with great results. Highly recommend!"</p>
+            <p><strong>- Paul R.</strong></p>
         </div>
     </section>
 
@@ -513,43 +462,15 @@
     </section>
 
     <div class="mobile-nav">
-        <a href="#home"><i class="fas fa-home"></i></a>
-        <a href="#services"><i class="fas fa-cogs"></i></a>
-        <a href="#portfolio"><i class="fas fa-briefcase"></i></a>
-        <a href="#contact"><i class="fas fa-envelope"></i></a>
+        <a href="index.html"><i class="fas fa-home"></i></a>
+        <a href="digitalmarketing.html"><i class="fas fa-cogs"></i></a>
+        <a href="webdevelopment.html"><i class="fas fa-briefcase"></i></a>
+        <a href="camerainstallation.html"><i class="fas fa-envelope"></i></a>
     </div>
 
     <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            const menuToggle = document.querySelector('.menu-toggle');
-            const navMenu = document.querySelector('.nav-menu');
-            const closeMenu = document.querySelector('.close-menu');
-
-            menuToggle.addEventListener('click', (e) => {
-                e.preventDefault();
-                navMenu.classList.toggle('active');
-            });
-
-            closeMenu.addEventListener('click', (e) => {
-                e.preventDefault();
-                navMenu.classList.remove('active');
-            });
-
-            // Close menu when clicking a link
-            navMenu.querySelectorAll('a').forEach(link => {
-                link.addEventListener('click', () => {
-                    navMenu.classList.remove('active');
-                });
-            });
-
-            // Close menu when clicking mobile nav links
-            document.querySelectorAll('.mobile-nav a').forEach(link => {
-                link.addEventListener('click', () => {
-                    navMenu.classList.remove('active');
-                });
-            });
-
             var swiper = new Swiper('.swiper-container', {
                 loop: false,
                 slidesPerView: 1,
@@ -564,40 +485,28 @@
                 }
             });
 
-            // Prevent multiple rapid clicks on mobile
-            let isProcessing = false;
-            document.querySelectorAll('.service-card').forEach(card => {
-                card.addEventListener('click', (e) => {
-                    if (isProcessing) {
-                        e.preventDefault();
-                        return;
+            // Trigger animations on scroll for each section
+            const sections = document.querySelectorAll('.hero, .services, .portfolio, .about-us, .testimonials, .contact');
+            function checkScroll() {
+                sections.forEach(section => {
+                    const sectionPosition = section.getBoundingClientRect().top;
+                    const screenPosition = window.innerHeight / 1.3;
+                    if (sectionPosition < screenPosition) {
+                        section.style.animationPlayState = 'running';
                     }
-                    isProcessing = true;
-
-                    const href = card.getAttribute('href');
-                    fetch(href, { method: 'HEAD' })
-                        .then(response => {
-                            isProcessing = false;
-                            if (!response.ok) {
-                                e.preventDefault();
-                                document.getElementById('error-message').style.display = 'block';
-                                setTimeout(() => {
-                                    document.getElementById('error-message').style.display = 'none';
-                                }, 3000);
-                            } else {
-                                window.location.href = href; // Navigate if page exists
-                            }
-                        })
-                        .catch(() => {
-                            isProcessing = false;
-                            e.preventDefault();
-                            document.getElementById('error-message').style.display = 'block';
-                            setTimeout(() => {
-                                document.getElementById('error-message').style.display = 'none';
-                            }, 3000);
-                        });
                 });
-            });
+                const serviceCards = document.querySelectorAll('.service-card');
+                serviceCards.forEach(card => {
+                    const cardPosition = card.getBoundingClientRect().top;
+                    if (cardPosition < screenPosition) {
+                        card.style.animationPlayState = 'running';
+                    }
+                });
+            }
+            window.addEventListener('scroll', checkScroll);
+            // Trigger hero animation on load
+            document.querySelector('.hero').style.animationPlayState = 'running';
+            checkScroll(); // Trigger other animations on load if in view
         });
     </script>
 </body>
